@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://852ptidk8nmv"]
+
+[ext_resource type="Script" path="res://Card_Folder/Card.gd" id="1_h6png"]
+[ext_resource type="Texture2D" uid="uid://lc8co5y84uhu" path="res://Card_Folder/cardbacks4092021.png" id="2_k6a4e"]
+
+[sub_resource type="Animation" id="Animation_tdw0k"]
+resource_name = "Card_Rotation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0l0vp"]
+_data = {
+"Card_Rotation": SubResource("Animation_tdw0k")
+}
+
+[node name="Card" type="Node2D"]
+script = ExtResource("1_h6png")
+
+[node name="Cardbacks4092021" type="Sprite2D" parent="."]
+position = Vector2(433, 154)
+texture = ExtResource("2_k6a4e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0l0vp")
+}
+
+[node name="Node2D" type="Node2D" parent="."]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpm4s0va5fplc"]
+
+[ext_resource type="Script" path="res://client.gd" id="1_2l05l"]
+
+[node name="Client" type="Node2D"]
+script = ExtResource("1_2l05l")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 521.0
+offset_bottom = 84.0
