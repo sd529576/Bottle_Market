@@ -1,4 +1,4 @@
-[gd_scene load_steps=678 format=3 uid="uid://rrfk3pfar6e6"]
+[gd_scene load_steps=683 format=3 uid="uid://rrfk3pfar6e6"]
 
 [ext_resource type="Script" path="res://market.gd" id="1_x3uwn"]
 [ext_resource type="Texture2D" uid="uid://bhkyu412bkkof" path="res://Vending Machine Art/Vending machine art-0.png" id="2_f3j4h"]
@@ -2738,10 +2738,46 @@ animations = [{
 "speed": 25.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yigd"]
+atlas = ExtResource("674_kxfp2")
+region = Rect2(27, 12, 45, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_el8br"]
+atlas = ExtResource("674_kxfp2")
+region = Rect2(123, 12, 42, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6a4qg"]
+atlas = ExtResource("674_kxfp2")
+region = Rect2(219, 12, 42, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yuto4"]
+atlas = ExtResource("674_kxfp2")
+region = Rect2(315, 12, 45, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q1b34"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yigd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_el8br")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6a4qg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yuto4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Market" type="Node2D"]
 script = ExtResource("1_x3uwn")
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+[node name="Background_animation" type="AnimatedSprite2D" parent="."]
 z_index = -1
 texture_filter = 1
 position = Vector2(581, 237.4)
@@ -2749,7 +2785,7 @@ scale = Vector2(2.2, 1.99286)
 sprite_frames = SubResource("SpriteFrames_8kt52")
 frame_progress = 0.672655
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Vending_Machine_anim" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(361, 239)
 scale = Vector2(1.3, 1.3)
@@ -2770,7 +2806,7 @@ size = Vector2i(600, 400)
 visible = false
 popup_window = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Window"]
+[node name="Gatcha_Simulation" type="AnimatedSprite2D" parent="Window"]
 position = Vector2(300, 200)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_a8ss3")
@@ -2785,4 +2821,11 @@ texture = ExtResource("674_kxfp2")
 hframes = 8
 vframes = 8
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Window"]
+visible = false
+position = Vector2(300, 150)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_q1b34")
+
 [connection signal="pressed" from="Roll" to="." method="_on_roll_pressed"]
+[connection signal="close_requested" from="Window" to="." method="_on_window_close_requested"]

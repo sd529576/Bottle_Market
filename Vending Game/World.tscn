@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://djw3exmao8kwh"]
+[gd_scene load_steps=4 format=3 uid="uid://djw3exmao8kwh"]
 
 [ext_resource type="Script" path="res://World.gd" id="1_cpcs3"]
+[ext_resource type="PackedScene" uid="uid://grpsgcbt567j" path="res://market_Host.tscn" id="2_byp4n"]
+[ext_resource type="PackedScene" uid="uid://rrfk3pfar6e6" path="res://market.tscn" id="2_dv2vb"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_cpcs3")
+host_scene = ExtResource("2_byp4n")
+client_scene = ExtResource("2_dv2vb")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_right = 406.0
@@ -30,6 +34,12 @@ offset_right = 905.0
 offset_bottom = 148.0
 text = "StartGame
 "
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_left = 304.0
+offset_top = 198.0
+offset_right = 737.0
+offset_bottom = 229.0
 
 [connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
