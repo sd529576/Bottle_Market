@@ -11,7 +11,7 @@ signal user_detected
 func _ready():
 	multiplayer.peer_connected.connect(Player_Connected)
 	multiplayer.connected_to_server.connect(connected_to_server)
-	
+	#client_scene.instantiate().New_bottle_sig.connect()
 #gets called on the server and client
 func Player_Connected(id):
 	if multiplayer.get_unique_id() != 1:
@@ -23,7 +23,7 @@ func Player_Connected(id):
 func connected_to_server():
 	print("Connected to Server!")
 	SendPlayerInformation.rpc($LineEdit.text,multiplayer.get_unique_id())
-	print(GameManager.Players)
+	#print(GameManager.Players)
 func _on_host_pressed():
 	start_server()
 	host_pressed = true
@@ -36,7 +36,7 @@ func start_server():
 	multiplayer.multiplayer_peer = peer
 	$RichTextLabel.text = "Server has started running.."
 	#SendPlayerInformation($LineEdit.text,multiplayer.get_unique_id())
-	print(GameManager.Players)
+	#print(GameManager.Players)
 	#print(peer)
 	#SendPlayerInformation.rpc($LineEdit.text,multiplayer.get_unique_id())
 	#SendPlayerInformation($LineEdit.text,multiplayer.get_unique_id())
@@ -85,3 +85,6 @@ func SendPlayerInformation(name,id):
 	if multiplayer.is_server():
 		SendPlayerInformation.rpc_id(1,id)
 		"""
+
+#func showing_unique_id(id):
+	

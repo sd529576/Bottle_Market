@@ -387,7 +387,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7i7kk"]
 size = Vector2(100, 127)
 
-[node name="Market_Host" type="Node2D"]
+[node name="Market" type="Node2D"]
 script = ExtResource("1_og6ng")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
