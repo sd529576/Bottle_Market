@@ -12,8 +12,6 @@ func _ready():
 	$AnimatedSprite2D2.play("default")
 	get_tree().root.get_node("World").user_detected.connect(New_user_window_creation)
 func New_user_window_creation():
-	#print(GameManager.Players)
-	#print(GameManager.Players)
 	player_number += 1
 	if len(get_node("Window_container").get_children()) == 0:
 		var window = Window.new()
@@ -37,9 +35,17 @@ func New_user_window_creation():
 		window.position.x = get_node("Window_container").get_children()[-1].position.x + 200
 		window.position.y = 200
 		window.size = Vector2(400,400)
+		window.name = str(GameManager.Players.keys()[player_number-1])
 		window.title = ("player " + str(player_number) + " (" + str(GameManager.Players.keys()[player_number-1]) + ")")
 		player_tracker.append([player_number,GameManager.Players.keys()[player_number-1]])
 		get_node("Window_container").add_child(window)
+		var text_box = RichTextLabel.new()
+		text_box.scale.x = 2
+		text_box.scale.y = 2
+		text_box.z_index = 2
+		text_box.size.x = 200
+		text_box.size.y = 200
+		window.add_child(text_box)
 """
 	for i in GameManager.Players.keys():
 		if i == 1:
@@ -80,17 +86,7 @@ func _process(delta):
 		"""
 	if On_card == true and Input.is_action_just_pressed("Rotate"):
 		$AnimationPlayer.play("Flipping_anim")
-	for i in $Window_container.get_children():
-		"""
-		print(i.name)
-		print(GameManager.Players.keys())
-		"""
-		if i.name in str(GameManager.Players.keys()):
-			for j in i.get_children():
-				#print(j)
-				if len(GameManager.Bottle_data) > 0:
-					var hmm = int(str(i.name))
-					j.text = str(GameManager.Bottle_data[hmm])
+	window_text_live_updates()
 	#print(bottle_list)
 func _on_area_2d_mouse_entered():
 	print("hmmmmm?")
@@ -110,3 +106,21 @@ func testing(client_id,random_num):
 	print(bottle_list)
 	if typeof(client_id) == TYPE_INT:
 		print("inting")
+
+func window_text_live_updates():
+	for wdow_id in $Window_container.get_children():
+		"""
+		print(i.name)
+		print(GameManager.Players.keys())
+		"""
+		# if assigned client id in window is in Player's keys,
+		if wdow_id.name in str(GameManager.Players.keys()):
+			#iterate through the children of those ids -> should be label on individual window as a child
+			for label in wdow_id.get_children():
+				#print(j)
+				#if len bottle data is same as the connected players from the server, 
+				if len(GameManager.Bottle_data) == len(GameManager.Players):
+					# "String Name" type is converted into integer + add text on individual windows
+					# Text should currently show the corresponding bottle that player rolled.
+					var integer_wdow_name = int(str(wdow_id.name))
+					label.text = str(GameManager.Bottle_data[integer_wdow_name])
