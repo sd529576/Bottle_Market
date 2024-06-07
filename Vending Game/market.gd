@@ -10,17 +10,13 @@ signal New_bottle_sig
 
 func _ready():
 	$Background_animation.play("default")
-func _on_button_pressed():
-	pass
-	# should revert back to the scene.
-
 #@rpc('any_peer',"call_local")
 func host_animation():
 	$Vending_Machine_anim.play("Main_Animation")
 func _on_roll_pressed():
 	host_animation()
 	var random = RandomNumberGenerator.new()
-	var random_num = random.randi_range(1,4)
+	var random_num = random.randi_range(1,170)
 	rpc_id(1,"testing",multiplayer.get_unique_id(),random_num)
 	testing(multiplayer.get_unique_id(),random_num)
 	#print(GameManager.Bottle_data)
@@ -41,13 +37,14 @@ func _physics_process(delta):
 			$Window/Gatcha_Simulation.hide()
 	#print(bottle_list)
 	#print(bottle_list)
-func _on_window_close_requested():
-	print("hmm?")
-
+	
 @rpc("any_peer","call_local")
 func testing(client_id,random_num):
 	number = random_num
 	bottle_list.append(number)
 	GameManager.Bottle_data[client_id] = bottle_list[-1]
-	print(GameManager.Bottle_data)
-	print(bottle_list)
+
+
+
+func _on_area_2d_body_entered(body):
+	print(body)

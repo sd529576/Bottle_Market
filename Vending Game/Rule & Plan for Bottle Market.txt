@@ -1,0 +1,33 @@
+Market System Summary / Rule
+
+
+
+Server receives the price for the range of individual bottle.
+
+
+player can determine if bottle should be sold by the offer
+given by the server
+
+For example, 
+
+Server offer -> Green bottle for $8 
+Client response option -> Accept(sell) / Deny(don't sell)
+
+Server and client both receive rating from -5 to 5.
+
+High Server rating lets server(host) to stock more items with longer duration of stocking. (3,4,5)
+
+Low Server Rating can reduce the space to stock + lower duration of stocking. (-5,-4,-3)
+
+
+High Client rating lets client to ask for better price as a set + higher chance of rolling expensive bottle.
+
+For example,
+
+If Server offers $7 for bottle, you can reverse-offer server for better price.
+
+If Server accepts your reverse-offer, your client rating will go down by -1 but receive the money you offered.
+If server declines, your client rating stays the same + get $3 for the attempt from the reverse-offer.
+
+Low Client Rating provides higher chance of rolling cheap bottle + duration of time to keep the bottle reduces.
+
