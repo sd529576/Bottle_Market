@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://egcoeb4np7nm"]
+
+[ext_resource type="Texture2D" uid="uid://huo6o5nfj31o" path="res://Food Images/drink captures.webp" id="1_3v7eo"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gei2o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yigd"]
+atlas = ExtResource("1_3v7eo")
+region = Rect2(27, 12, 45, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_el8br"]
+atlas = ExtResource("1_3v7eo")
+region = Rect2(123, 12, 42, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6a4qg"]
+atlas = ExtResource("1_3v7eo")
+region = Rect2(219, 12, 42, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yuto4"]
+atlas = ExtResource("1_3v7eo")
+region = Rect2(315, 12, 45, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_15v1u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yigd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_el8br")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6a4qg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yuto4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07rac"]
+size = Vector2(90, 145)
+
+[node name="RigidBody2D" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_gei2o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1)
+sprite_frames = SubResource("SpriteFrames_15v1u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.5)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_07rac")
