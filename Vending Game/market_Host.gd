@@ -3,14 +3,18 @@ extends Node2D
 var player_number = 0
 var player_tracker = []
 var spacing = 200
-var On_card = false
+var card_detected = false
 var bottle_list = []
 var number = 0
 var client_tester = 0
 var re_roll_balance = 10
-var on_item = false
+var Item_count = 0
+#var on_item = false
 var once = false
 var held = false
+var card_formed = false
+var hmm = false
+var new_sprite = preload("res://new_sprite.tscn").instantiate()
 func _ready():
 	$Lobby_bg.play("default")
 	get_tree().root.get_node("World").user_detected.connect(New_user_window_creation)
@@ -49,47 +53,67 @@ func New_user_window_creation():
 		var sprite = preload("res://new_sprite.tscn").instantiate()
 		window.add_child(sprite)
 func _process(delta):
+	
+	window_text_live_updates()
 	#print(player_tracker)
 	#print(GameManager.Bottle_data)
 	"""
 	if len(GameManager.Bottle_data) != 0:
 		print(GameManager.Bottle_data[0])
 		"""
-	if On_card == true and Input.is_action_just_pressed("left_click"):
+	if card_detected == true and Input.is_action_just_pressed("left_click") and card_formed == false:
+		Item_count += 1
+		var card_sprite = preload("res://new_sprite.tscn").instantiate()
+		card_sprite.name = "fruit_sprite" + str(Item_count)
+		card_sprite.position = Vector2(0,0)
+		get_node("Item_Container").add_child(card_sprite)
+		card_formed = true
 		$AnimationPlayer.play("Flipping_anim")
-	window_text_live_updates()
+	elif card_formed == true and Input.is_action_just_pressed("left_click") and card_detected == true:
+		$AnimationPlayer.play("Flipping_anim")
+	"""
+	if on_item == true and Input.is_action_just_pressed("left_click"):
+		held = true
+	elif Input.is_action_just_released("left_click"):
+		held = false
+	
+	if held == true:
+		for i in $GoldCard.get_children():
+			if i.name == "fruit_sprite":
+				var pos = get_viewport().get_mouse_position()
+				i.position.x = pos.x + 1550
+				i.position.y = pos.y
+	elif held == false:
+		for i in $GoldCard.get_children():
+			if i.name == "fruit_sprite":
+				i.position.x = 2100
+				i.position.y = 400
+				"""
 	#print(bottle_list)
 	#print(GameManager.Bottle_data)
 	#print($OptionButton.selected)
 	#print(GameManager.Players)
-	if on_item == true and once == false:
-		var collected_sprite = preload("res://new_sprite.tscn").instantiate()
-		collected_sprite.show()
-		get_node("Holding_item_container").add_child(collected_sprite)
-		once = true
-		collected_sprite.frame = $GoldCard/AnimatedSprite2D3.frame
-	if len($Holding_item_container.get_children()) > 0 and Input.is_action_just_pressed("left_click"):
+	#print(on_item)
+	if GameManager.on_item and Input.is_action_just_pressed("left_click"):
 		held = true
-	elif Input.is_action_just_released("left_click"):
+	elif Input.is_action_just_released("left_click") and GameManager.on_item:
 		held = false
+		for i in $Item_Container.get_children():
+			if i.name == "fruit_sprite" + str(Item_count):
+				i.position = Vector2(0,0)
 	if held == true:
-		for i in $Holding_item_container.get_children():
-			var pos = get_viewport().get_mouse_position()
-			i.position.x = pos.x + 1550
-			i.position.y = pos.y
-		
-	elif held == false:
-		for i in $Holding_item_container.get_children():
-			i.position.x = 2100
-			i.position.y = 400
+		for i in $Item_Container.get_children():
+			if i.name == "fruit_sprite" + str(Item_count):
+				var pos = get_global_mouse_position()
+				i.global_position = pos
 func _on_area_2d_mouse_entered():
 	print("hmmmmm?")
-	On_card = true
+	card_detected = true
 
 
 func _on_area_2d_mouse_exited():
 	print("out_of_it")
-	On_card = false
+	card_detected = false
 	
 @rpc("any_peer","call_local")
 func testing(client_id,random_num):
@@ -137,8 +161,26 @@ func _on_trading_back_btn_pressed():
 func re_roll():
 	var random = RandomNumberGenerator.new()
 	var random_num = random.randi_range(1,170)
-	$GoldCard/AnimatedSprite2D3.frame = random_num
+	for i in $Item_Container.get_children():
+		if i.name == "fruit_sprite" + str(Item_count):
+			i.frame = random_num
+			i.show()
 
 
-func _on_mouse_entered_mouse_entered():
-	on_item = true
+func _on_area_2d_body_entered(body):
+	print(body)
+
+
+
+func _on_first_area_area_entered(area):
+	card_formed = false
+	for i in $Item_Container.get_children():
+		if i.name == "fruit_sprite"+str(Item_count):
+			i.global_position = $Item_Position_Container/First_Item_space.global_position
+
+
+func _on_second_area_area_entered(area):
+	card_formed = false
+	for i in $Item_Container.get_children():
+		if i.name == "fruit_sprite" + str(Item_count):
+			i.global_position = $Item_Position_Container/Second_Item_space.global_position

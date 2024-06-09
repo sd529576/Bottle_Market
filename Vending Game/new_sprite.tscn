@@ -1,4 +1,4 @@
-[gd_scene load_steps=175 format=3 uid="uid://bhrgbg2hhyt75"]
+[gd_scene load_steps=177 format=3 uid="uid://bhrgbg2hhyt75"]
 
 [ext_resource type="Texture2D" uid="uid://cmix3hlb7kw3i" path="res://Food Images/items-foodicons.png" id="1_1pkw7"]
 [ext_resource type="Texture2D" uid="uid://dg1ma00thy56e" path="res://Food Images/Pixel Art Icon Pack - RPG/Equipment/Bag.png" id="2_v64su"]
@@ -58,6 +58,7 @@
 [ext_resource type="Texture2D" uid="uid://ik60bl76n41d" path="res://Food Images/Pixel Art Icon Pack - RPG/Monster Part/Monster Meat.png" id="56_abpio"]
 [ext_resource type="Texture2D" uid="uid://8rm3dh8wuq1d" path="res://Food Images/Pixel Art Icon Pack - RPG/Monster Part/Skull.png" id="57_e4btq"]
 [ext_resource type="Texture2D" uid="uid://8g473vt2rv33" path="res://Food Images/Pixel Art Icon Pack - RPG/Monster Part/Slime Gel.png" id="58_63wju"]
+[ext_resource type="Script" path="res://new_sprite.gd" id="59_234wm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xnuqe"]
 atlas = ExtResource("1_1pkw7")
@@ -1043,10 +1044,20 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ykk1q"]
+size = Vector2(32, 32)
+
 [node name="new_sprite" type="AnimatedSprite2D"]
 visible = false
 z_index = 2
 texture_filter = 1
-position = Vector2(202, 155)
-scale = Vector2(4.90625, 4.5625)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_v2mp6")
+script = ExtResource("59_234wm")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_ykk1q")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
