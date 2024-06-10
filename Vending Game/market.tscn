@@ -3925,4 +3925,6 @@ offset_top = 567.0
 offset_right = 508.0
 offset_bottom = 619.0
 
+[node name="Offer_window_container" type="Node2D" parent="."]
+
 [connection signal="pressed" from="Roll" to="." method="_on_roll_pressed"]

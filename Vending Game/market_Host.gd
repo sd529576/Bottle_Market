@@ -109,12 +109,10 @@ func _process(delta):
 				var pos = get_global_mouse_position()
 				i.global_position = pos
 func _on_area_2d_mouse_entered():
-	print("hmmmmm?")
 	card_detected = true
 
 
 func _on_area_2d_mouse_exited():
-	print("out_of_it")
 	card_detected = false
 	
 @rpc("any_peer","call_local")
@@ -122,10 +120,6 @@ func testing(client_id,random_num):
 	number = random_num
 	bottle_list.append(number)
 	GameManager.Bottle_data[client_id] = bottle_list[-1]
-	print(GameManager.Bottle_data)
-	print(bottle_list)
-	if typeof(client_id) == TYPE_INT:
-		print("inting")
 
 
 # this code needs an optimization (UGLY CODE)
@@ -196,6 +190,8 @@ func offer(Server_item_data):
 func _on_offer_button_pressed():
 	for i in $Item_Container.get_children():
 		i.queue_free()
+	item_placed = false
+	Item_count = 0
 	$Button.disabled = false
 	print(GameManager.Server_item_data)
 # only show to player1 at the current moment by unabling the player 1 button.

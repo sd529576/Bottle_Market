@@ -6,6 +6,7 @@ var called = false
 var number = 0
 var bottle_list = []
 var server_item_data_client = {}
+var Offer_number = 0
 signal New_bottle_sig
 
 func _ready():
@@ -47,16 +48,25 @@ func testing(client_id,random_num):
 @rpc("any_peer","call_local")
 func offer(server_item_data):
 	server_item_data_client = server_item_data
+	"""
 	$RichTextLabel.text = "Server just offered you a item/items to trade!"
 	print("server just offered you a item/items to trade!")
 	print("Offered Items are " )
+	"""
 	#below are the offered items numbers
 	"""
 	for i in len(server_item_data):
 		print(server_item_data["fruit_sprite"+str(i+1)])
 		"""
 	var offer_window = preload("res://Offer_window.tscn").instantiate()
-	add_child(offer_window)
+	offer_window.name = "Offer Window " + str(Offer_number)
+	get_node("Offer_window_container").add_child(offer_window)
 	New_bottle_sig.emit()
+	Offer_number += 1
+	print("Offer_number from Market Script: " + str(Offer_number))
+	
+	
+"""
 func _on_area_2d_body_entered(body):
 	print(body)
+"""
