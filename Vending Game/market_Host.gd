@@ -15,6 +15,7 @@ var held = false
 var card_formed = false
 var hmm = false
 var new_sprite = preload("res://new_sprite.tscn").instantiate()
+var item_placed = false
 func _ready():
 	$Lobby_bg.play("default")
 	get_tree().root.get_node("World").user_detected.connect(New_user_window_creation)
@@ -101,6 +102,7 @@ func _process(delta):
 		for i in $Item_Container.get_children():
 			if i.name == "fruit_sprite" + str(Item_count):
 				i.position = Vector2(0,0)
+				
 	if held == true:
 		for i in $Item_Container.get_children():
 			if i.name == "fruit_sprite" + str(Item_count):
@@ -177,10 +179,28 @@ func _on_first_area_area_entered(area):
 	for i in $Item_Container.get_children():
 		if i.name == "fruit_sprite"+str(Item_count):
 			i.global_position = $Item_Position_Container/First_Item_space.global_position
-
-
+			GameManager.Server_item_data[i.name] = i.frame
+			item_placed = true
 func _on_second_area_area_entered(area):
 	card_formed = false
 	for i in $Item_Container.get_children():
 		if i.name == "fruit_sprite" + str(Item_count):
 			i.global_position = $Item_Position_Container/Second_Item_space.global_position
+			GameManager.Server_item_data[i.name] = i.frame
+			item_placed = true
+			
+@rpc("any_peer","call_local")
+func offer(Server_item_data):
+	pass
+		
+func _on_offer_button_pressed():
+	for i in $Item_Container.get_children():
+		i.queue_free()
+	$Button.disabled = false
+	print(GameManager.Server_item_data)
+# only show to player1 at the current moment by unabling the player 1 button.
+# still need to figure out how to get an option to choose which player to offer.
+
+func _on_button_pressed():
+	if len(GameManager.Players.keys()) == 1:
+		rpc_id(GameManager.Players.keys()[0],"offer",GameManager.Server_item_data)

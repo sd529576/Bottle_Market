@@ -3919,4 +3919,10 @@ texture = ExtResource("675_28qgb")
 position = Vector2(498.25, 611)
 shape = SubResource("RectangleShape2D_xtnk3")
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 40.0
+offset_top = 567.0
+offset_right = 508.0
+offset_bottom = 619.0
+
 [connection signal="pressed" from="Roll" to="." method="_on_roll_pressed"]

@@ -690,10 +690,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nub8k"]
-size = Vector2(60, 10)
+size = Vector2(60, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vmk0s"]
-size = Vector2(59, 10.5)
+size = Vector2(59, 14)
 
 [node name="Market" type="Node2D"]
 position = Vector2(1824, 104)
@@ -751,7 +751,7 @@ position = Vector2(0, -5)
 position = Vector2(43, 6.77771)
 shape = SubResource("RectangleShape2D_7i7kk")
 
-[node name="Button" type="Button" parent="."]
+[node name="Offer_Button" type="Button" parent="."]
 offset_left = -1413.25
 offset_top = 527.0
 offset_right = -1180.25
@@ -821,22 +821,22 @@ frame_progress = 0.626052
 [node name="Item_Position_Container" type="Node2D" parent="."]
 
 [node name="First_Item_space" type="Node2D" parent="Item_Position_Container"]
-position = Vector2(-1399, 52)
+position = Vector2(-1400, 54)
 
 [node name="First_Area" type="Area2D" parent="Item_Position_Container/First_Item_space"]
 position = Vector2(-1, 12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Item_Position_Container/First_Item_space/First_Area"]
-position = Vector2(1, 27)
+position = Vector2(1, 25)
 shape = SubResource("RectangleShape2D_nub8k")
 
 [node name="Second_Item_space" type="Node2D" parent="Item_Position_Container"]
-position = Vector2(-1329, 52)
+position = Vector2(-1329, 54)
 
 [node name="Second_Area" type="Area2D" parent="Item_Position_Container/Second_Item_space"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Item_Position_Container/Second_Item_space/Second_Area"]
-position = Vector2(-0.5, 38.75)
+position = Vector2(-0.5, 37)
 shape = SubResource("RectangleShape2D_vmk0s")
 
 [node name="Node2D5" type="Node2D" parent="Item_Position_Container"]
@@ -845,9 +845,19 @@ position = Vector2(-1259, 52)
 [node name="Node2D6" type="Node2D" parent="Item_Position_Container"]
 position = Vector2(-1189, 52)
 
+[node name="Button" type="Button" parent="."]
+offset_left = -900.0
+offset_top = 121.0
+offset_right = -805.0
+offset_bottom = 166.0
+disabled = true
+text = "Player1"
+
 [connection signal="mouse_entered" from="GoldCard/Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="GoldCard/Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="pressed" from="Offer_Button" to="." method="_on_offer_button_pressed"]
 [connection signal="pressed" from="Trade" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Trading_Back_Btn" to="." method="_on_trading_back_btn_pressed"]
 [connection signal="area_entered" from="Item_Position_Container/First_Item_space/First_Area" to="." method="_on_first_area_area_entered"]
 [connection signal="area_entered" from="Item_Position_Container/Second_Item_space/Second_Area" to="." method="_on_second_area_area_entered"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

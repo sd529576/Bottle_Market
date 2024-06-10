@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3rhpnd1hvv1o"]
+
+[ext_resource type="Script" path="res://Offer_window.gd" id="1_qjm7y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ffnr6"]
+bg_color = Color(0.6, 0.890196, 0.6, 1)
+
+[node name="AcceptDialog" type="AcceptDialog"]
+title = "OFFER"
+size = Vector2i(200, 200)
+visible = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_ffnr6")
+script = ExtResource("1_qjm7y")
