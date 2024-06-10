@@ -184,7 +184,7 @@ func _on_second_area_area_entered(area):
 			item_placed = true
 			
 @rpc("any_peer","call_local")
-func offer(Server_item_data):
+func offer(Server_item_data,money):
 	pass
 		
 func _on_offer_button_pressed():
@@ -199,4 +199,4 @@ func _on_offer_button_pressed():
 
 func _on_button_pressed():
 	if len(GameManager.Players.keys()) == 1:
-		rpc_id(GameManager.Players.keys()[0],"offer",GameManager.Server_item_data)
+		rpc_id(GameManager.Players.keys()[0],"offer",GameManager.Server_item_data,$OptionButton.selected)

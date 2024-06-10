@@ -1,14 +1,239 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3rhpnd1hvv1o"]
+[gd_scene load_steps=49 format=3 uid="uid://c3rhpnd1hvv1o"]
 
 [ext_resource type="Script" path="res://Offer_window.gd" id="1_qjm7y"]
+[ext_resource type="Texture2D" uid="uid://tgt4xkp226u8" path="res://Tavern Animated_Frames/frame_00_delay-0.3s.png" id="2_y4qhj"]
+[ext_resource type="Texture2D" uid="uid://dw3lpwxtf1wlf" path="res://Tavern Animated_Frames/frame_01_delay-0.3s.png" id="3_cps7q"]
+[ext_resource type="Texture2D" uid="uid://cwqqmmnkl7ly6" path="res://Tavern Animated_Frames/frame_02_delay-0.3s.png" id="4_pinw4"]
+[ext_resource type="Texture2D" uid="uid://b7rm4572kw0gr" path="res://Tavern Animated_Frames/frame_03_delay-0.3s.png" id="5_4hcpv"]
+[ext_resource type="Texture2D" uid="uid://dcjm1t1x78lkx" path="res://Tavern Animated_Frames/frame_04_delay-0.3s.png" id="6_vwm0m"]
+[ext_resource type="Texture2D" uid="uid://4rxfyamhh2wn" path="res://Tavern Animated_Frames/frame_05_delay-0.3s.png" id="7_dvvbk"]
+[ext_resource type="Texture2D" uid="uid://drl3nef2r721b" path="res://Tavern Animated_Frames/frame_06_delay-0.3s.png" id="8_51f3r"]
+[ext_resource type="Texture2D" uid="uid://cj4t30aufqdp6" path="res://Tavern Animated_Frames/frame_07_delay-0.3s.png" id="9_u580t"]
+[ext_resource type="Texture2D" uid="uid://84ma4k37klwx" path="res://Tavern Animated_Frames/frame_08_delay-0.3s.png" id="10_h6nen"]
+[ext_resource type="Texture2D" uid="uid://cywly23m7j1hk" path="res://Tavern Animated_Frames/frame_09_delay-0.3s.png" id="11_himfh"]
+[ext_resource type="Texture2D" uid="uid://bcuq3fwr5oc6" path="res://Tavern Animated_Frames/frame_10_delay-0.3s.png" id="12_euf2q"]
+[ext_resource type="Texture2D" uid="uid://ck3ymuww847el" path="res://Tavern Animated_Frames/frame_11_delay-0.3s.png" id="13_4spef"]
+[ext_resource type="Texture2D" uid="uid://dlqvxrsq4beky" path="res://Tavern Animated_Frames/frame_12_delay-0.3s.png" id="14_8xyfr"]
+[ext_resource type="Texture2D" uid="uid://c8hk5kiso3ifx" path="res://Tavern Animated_Frames/frame_13_delay-0.3s.png" id="15_laa6j"]
+[ext_resource type="Texture2D" uid="uid://b6duwqv8eylq8" path="res://Tavern Animated_Frames/frame_14_delay-0.3s.png" id="16_6l0gk"]
+[ext_resource type="Texture2D" uid="uid://dgf27ogq22qeu" path="res://Tavern Animated_Frames/frame_15_delay-0.3s.png" id="17_pcwod"]
+[ext_resource type="Texture2D" uid="uid://75ox65rnccif" path="res://Tavern Animated_Frames/frame_16_delay-0.3s.png" id="18_16wve"]
+[ext_resource type="Texture2D" uid="uid://b8ycl6tuhkbda" path="res://Tavern Animated_Frames/frame_17_delay-0.3s.png" id="19_cd5i5"]
+[ext_resource type="Texture2D" uid="uid://clqmced31fg4v" path="res://Tavern Animated_Frames/frame_18_delay-0.3s.png" id="20_rphtr"]
+[ext_resource type="Texture2D" uid="uid://b46gdu78354na" path="res://Tavern Animated_Frames/frame_19_delay-0.3s.png" id="21_i6rie"]
+[ext_resource type="Texture2D" uid="uid://b52pd4wx1rmj5" path="res://Tavern Animated_Frames/frame_20_delay-0.3s.png" id="22_l11eg"]
+[ext_resource type="Texture2D" uid="uid://gfgn752o62t2" path="res://Tavern Animated_Frames/frame_21_delay-0.3s.png" id="23_tpqp6"]
+[ext_resource type="Texture2D" uid="uid://d2tdefyqbjwfo" path="res://Tavern Animated_Frames/frame_22_delay-0.3s.png" id="24_k3hjp"]
+[ext_resource type="Texture2D" uid="uid://dc60rds0gv5qm" path="res://Tavern Animated_Frames/frame_23_delay-0.3s.png" id="25_0mha7"]
+[ext_resource type="Texture2D" uid="uid://cunh01o7rgegj" path="res://Tavern Animated_Frames/frame_24_delay-0.3s.png" id="26_5m5qq"]
+[ext_resource type="Texture2D" uid="uid://cqmh75qq3byqn" path="res://Tavern Animated_Frames/frame_25_delay-0.3s.png" id="27_d1x7y"]
+[ext_resource type="Texture2D" uid="uid://ukygjv2noywb" path="res://Tavern Animated_Frames/frame_26_delay-0.3s.png" id="28_f5xtp"]
+[ext_resource type="Texture2D" uid="uid://l30aj3n5m3hg" path="res://Tavern Animated_Frames/frame_27_delay-0.3s.png" id="29_3ukc0"]
+[ext_resource type="Texture2D" uid="uid://cxi400lvlspxf" path="res://Tavern Animated_Frames/frame_28_delay-0.3s.png" id="30_bo610"]
+[ext_resource type="Texture2D" uid="uid://bgibpk7xl101c" path="res://Tavern Animated_Frames/frame_29_delay-0.3s.png" id="31_dtsrl"]
+[ext_resource type="Texture2D" uid="uid://bbowdda6jlqs2" path="res://Tavern Animated_Frames/frame_30_delay-0.3s.png" id="32_vki8h"]
+[ext_resource type="Texture2D" uid="uid://bvwyutnvkxbob" path="res://Tavern Animated_Frames/frame_31_delay-0.3s.png" id="33_dur7t"]
+[ext_resource type="Texture2D" uid="uid://c6pv3myjf4ys5" path="res://Tavern Animated_Frames/frame_32_delay-0.3s.png" id="34_lndi5"]
+[ext_resource type="Texture2D" uid="uid://cnd100onu53g6" path="res://Tavern Animated_Frames/frame_33_delay-0.3s.png" id="35_mnjat"]
+[ext_resource type="Texture2D" uid="uid://c6xr2m22ex13y" path="res://Tavern Animated_Frames/frame_34_delay-0.3s.png" id="36_vr42j"]
+[ext_resource type="Texture2D" uid="uid://bbxagp3gll6m1" path="res://Tavern Animated_Frames/frame_35_delay-0.3s.png" id="37_afkxd"]
+[ext_resource type="Texture2D" uid="uid://bwxynoff6cbbg" path="res://Tavern Animated_Frames/frame_36_delay-0.3s.png" id="38_0dnjq"]
+[ext_resource type="Texture2D" uid="uid://dn3x7cj55lgnp" path="res://Tavern Animated_Frames/frame_37_delay-0.3s.png" id="39_6wyfe"]
+[ext_resource type="Texture2D" uid="uid://dia7ornxfxjbh" path="res://Tavern Animated_Frames/frame_38_delay-0.3s.png" id="40_dgnyk"]
+[ext_resource type="Texture2D" uid="uid://brtarbgt11bkp" path="res://Tavern Animated_Frames/frame_39_delay-0.3s.png" id="41_wuqcr"]
+[ext_resource type="Texture2D" uid="uid://c8l7v1dmcfpon" path="res://Tavern Animated_Frames/frame_40_delay-0.3s.png" id="42_ywh06"]
+[ext_resource type="Texture2D" uid="uid://duk0o5cataef2" path="res://Tavern Animated_Frames/frame_41_delay-0.3s.png" id="43_5re8b"]
+[ext_resource type="Texture2D" uid="uid://bgdq5kh23vkj6" path="res://Tavern Animated_Frames/frame_42_delay-0.3s.png" id="44_bxn6u"]
+[ext_resource type="Texture2D" uid="uid://kas0wjkwb6rr" path="res://Tavern Animated_Frames/frame_43_delay-0.3s.png" id="45_eg0rn"]
+[ext_resource type="Texture2D" uid="uid://p1vvqwdmbyxa" path="res://Speech Bubble.png" id="46_43ilt"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ffnr6"]
-bg_color = Color(0.6, 0.890196, 0.6, 1)
+[sub_resource type="Theme" id="Theme_2616w"]
 
-[node name="AcceptDialog" type="AcceptDialog"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_iqolu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_y4qhj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_cps7q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_pinw4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_4hcpv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vwm0m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_dvvbk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_51f3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_u580t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_h6nen")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_himfh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_euf2q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_4spef")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_8xyfr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_laa6j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_6l0gk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_pcwod")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_16wve")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_cd5i5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_rphtr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_i6rie")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_l11eg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_tpqp6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_k3hjp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_0mha7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_5m5qq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_d1x7y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_f5xtp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_3ukc0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_bo610")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_dtsrl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_vki8h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_dur7t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_lndi5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_mnjat")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_vr42j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_afkxd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_0dnjq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_6wyfe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_dgnyk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_wuqcr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_ywh06")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_5re8b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_bxn6u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_eg0rn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="Window" type="Window"]
 title = "OFFER"
 position = Vector2i(100, 100)
-size = Vector2i(200, 200)
-visible = true
-theme_override_styles/panel = SubResource("StyleBoxFlat_ffnr6")
+size = Vector2i(350, 260)
+wrap_controls = true
+exclusive = true
+theme = SubResource("Theme_2616w")
 script = ExtResource("1_qjm7y")
+
+[node name="Accept_Btn" type="Button" parent="."]
+offset_left = 50.0
+offset_top = 200.0
+offset_right = 110.0
+offset_bottom = 250.0
+text = "Accept"
+
+[node name="Reject_Btn" type="Button" parent="."]
+offset_left = 240.0
+offset_top = 200.0
+offset_right = 300.0
+offset_bottom = 250.0
+text = "Reject
+"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -1
+position = Vector2(170, 130)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_iqolu")
+frame_progress = 0.311433
+
+[node name="SpeechBubble" type="Sprite2D" parent="."]
+position = Vector2(260, 50)
+scale = Vector2(0.07, 0.07)
+texture = ExtResource("46_43ilt")
+
+[node name="Speech_Bubble_text" type="RichTextLabel" parent="."]
+offset_left = 210.0
+offset_top = 10.0
+offset_right = 360.0
+offset_bottom = 110.0
+scale = Vector2(0.8, 0.8)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "We offer you
+$ "
+
+[connection signal="pressed" from="Accept_Btn" to="." method="_on_accept_btn_pressed"]
+[connection signal="pressed" from="Reject_Btn" to="." method="_on_reject_btn_pressed"]
