@@ -10,8 +10,8 @@ func _process(delta):
 	"""
 func delivered_server_item_creation():
 	print(GameManager.offer_number)
-	$Speech_Bubble_text.text += str(get_parent().get_parent().money_offered)
 	if name == "Offer Window "+ str(GameManager.offer_number):
+		$Speech_Bubble_text.text = "We Offer you $" +str(get_parent().get_parent().money_offered) + " for these items."
 		GameManager.offer_number += 1
 		GameManager.item_spacing = 50
 		for i in len(get_parent().get_parent().server_item_data_client):
@@ -22,7 +22,7 @@ func delivered_server_item_creation():
 			new_sprite.show()
 			add_child(new_sprite)
 			GameManager.item_spacing = GameManager.item_spacing + 50
-
+		get_parent().get_parent().server_item_data_client = {}
 
 func _on_accept_btn_pressed():
 	print("Accepted Offer")

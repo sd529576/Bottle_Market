@@ -9,7 +9,7 @@ var number = 0
 var client_tester = 0
 var re_roll_balance = 10
 var Item_count = 0
-#var on_item = false
+var on_item = false
 var once = false
 var held = false
 var card_formed = false
@@ -54,14 +54,14 @@ func New_user_window_creation():
 		var sprite = preload("res://new_sprite.tscn").instantiate()
 		window.add_child(sprite)
 func _process(delta):
-	
-	window_text_live_updates()
-	#print(player_tracker)
-	#print(GameManager.Bottle_data)
+	print("server_item_data: " + str(GameManager.Server_item_data))
 	"""
-	if len(GameManager.Bottle_data) != 0:
-		print(GameManager.Bottle_data[0])
-		"""
+	print("length of server_item_data: " + str(len(GameManager.Server_item_data)))
+	print("Item_count: " + str(Item_count))
+	print(card_formed)
+	"""
+	window_text_live_updates()
+	
 	if card_detected == true and Input.is_action_just_pressed("left_click") and card_formed == false:
 		Item_count += 1
 		var card_sprite = preload("res://new_sprite.tscn").instantiate()
@@ -70,44 +70,28 @@ func _process(delta):
 		get_node("Item_Container").add_child(card_sprite)
 		card_formed = true
 		$AnimationPlayer.play("Flipping_anim")
+	"""
 	elif card_formed == true and Input.is_action_just_pressed("left_click") and card_detected == true:
 		$AnimationPlayer.play("Flipping_anim")
-	"""
-	if on_item == true and Input.is_action_just_pressed("left_click"):
+		"""
+	if Input.is_action_just_pressed("left_click") and on_item == true:
 		held = true
 	elif Input.is_action_just_released("left_click"):
 		held = false
-	
-	if held == true:
-		for i in $GoldCard.get_children():
-			if i.name == "fruit_sprite":
-				var pos = get_viewport().get_mouse_position()
-				i.position.x = pos.x + 1550
-				i.position.y = pos.y
-	elif held == false:
-		for i in $GoldCard.get_children():
-			if i.name == "fruit_sprite":
-				i.position.x = 2100
-				i.position.y = 400
-				"""
-	#print(bottle_list)
-	#print(GameManager.Bottle_data)
-	#print($OptionButton.selected)
-	#print(GameManager.Players)
-	#print(on_item)
-	if GameManager.on_item and Input.is_action_just_pressed("left_click"):
-		held = true
-	elif Input.is_action_just_released("left_click") and GameManager.on_item:
-		held = false
-		for i in $Item_Container.get_children():
-			if i.name == "fruit_sprite" + str(Item_count):
-				i.position = Vector2(0,0)
-				
+		
 	if held == true:
 		for i in $Item_Container.get_children():
 			if i.name == "fruit_sprite" + str(Item_count):
 				var pos = get_global_mouse_position()
 				i.global_position = pos
+				
+	if len(GameManager.Server_item_data) == 0 and Item_count > len(GameManager.Server_item_data):
+		for i in $Item_Container.get_children():
+			if Item_count < len($Item_Container.get_children()):
+				i.name = "fruit_sprite" + str(Item_count)
+				Item_count += 1
+			elif Item_count == len($Item_Container.get_children()):
+				i.name = "fruit_sprite"+ str(Item_count)
 func _on_area_2d_mouse_entered():
 	card_detected = true
 
@@ -136,6 +120,7 @@ func window_text_live_updates():
 						# "String Name" type is converted into integer + add text on individual windows
 						# Text should currently show the corresponding bottle that player rolled.
 						label.frame = GameManager.Bottle_data[integer_wdow_name]
+						label.position = Vector2(200,100)
 						label.show()
 
 func _on_button_2_pressed():
@@ -171,32 +156,50 @@ func _on_area_2d_body_entered(body):
 func _on_first_area_area_entered(area):
 	card_formed = false
 	for i in $Item_Container.get_children():
-		if i.name == "fruit_sprite"+str(Item_count):
+		if i.name == "fruit_sprite1":
 			i.global_position = $Item_Position_Container/First_Item_space.global_position
 			GameManager.Server_item_data[i.name] = i.frame
-			item_placed = true
 func _on_second_area_area_entered(area):
 	card_formed = false
 	for i in $Item_Container.get_children():
-		if i.name == "fruit_sprite" + str(Item_count):
+		if i.name == "fruit_sprite2":
 			i.global_position = $Item_Position_Container/Second_Item_space.global_position
 			GameManager.Server_item_data[i.name] = i.frame
-			item_placed = true
 			
+func _on_third_area_area_entered(area):
+	card_formed = false
+	for i in $Item_Container.get_children():
+		if i.name == "fruit_sprite3":
+			i.global_position = $Item_Position_Container/Third_Item_Space.global_position
+			GameManager.Server_item_data[i.name] = i.frame
+	
 @rpc("any_peer","call_local")
 func offer(Server_item_data,money):
 	pass
 		
 func _on_offer_button_pressed():
-	for i in $Item_Container.get_children():
-		i.queue_free()
-	item_placed = false
-	Item_count = 0
-	$Button.disabled = false
+	for i in GameManager.Server_item_data.keys():
+		for j in $Item_Container.get_children():
+			if i == str(j.name):
+				j.queue_free()
+	#length of server item data gives the remainder of the items left for the server after offering.
+	if len(GameManager.Players.keys()) == 1:
+		$Player1_Offer.disabled = false
+	elif len(GameManager.Players.keys()) == 2:
+		$Player1_Offer.disabled = false
+		$Player2_Offer.disabled = false
 	print(GameManager.Server_item_data)
+	#GameManager.Server_item_data = {}
 # only show to player1 at the current moment by unabling the player 1 button.
 # still need to figure out how to get an option to choose which player to offer.
 
-func _on_button_pressed():
-	if len(GameManager.Players.keys()) == 1:
-		rpc_id(GameManager.Players.keys()[0],"offer",GameManager.Server_item_data,$OptionButton.selected)
+func _on_player_1_offer_pressed():
+	rpc_id(GameManager.Players.keys()[0],"offer",GameManager.Server_item_data,$OptionButton.selected)
+	Item_count -= len(GameManager.Server_item_data)
+	GameManager.Server_item_data = {}
+
+
+func _on_player_2_offer_pressed():
+	rpc_id(GameManager.Players.keys()[1],"offer",GameManager.Server_item_data,$OptionButton.selected)
+	Item_count -= len(GameManager.Server_item_data)
+	GameManager.Server_item_data = {}

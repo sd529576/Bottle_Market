@@ -1,4 +1,4 @@
-[gd_scene load_steps=857 format=3 uid="uid://rrfk3pfar6e6"]
+[gd_scene load_steps=859 format=3 uid="uid://rrfk3pfar6e6"]
 
 [ext_resource type="Script" path="res://market.gd" id="1_x3uwn"]
 [ext_resource type="Texture2D" uid="uid://bhkyu412bkkof" path="res://Vending Machine Art/Vending machine art-0.png" id="2_f3j4h"]
@@ -734,6 +734,7 @@
 [ext_resource type="Texture2D" uid="uid://ik60bl76n41d" path="res://Food Images/Pixel Art Icon Pack - RPG/Monster Part/Monster Meat.png" id="729_arcxt"]
 [ext_resource type="Texture2D" uid="uid://8rm3dh8wuq1d" path="res://Food Images/Pixel Art Icon Pack - RPG/Monster Part/Skull.png" id="730_w1j8b"]
 [ext_resource type="Texture2D" uid="uid://8g473vt2rv33" path="res://Food Images/Pixel Art Icon Pack - RPG/Monster Part/Slime Gel.png" id="731_t2tkt"]
+[ext_resource type="Texture2D" uid="uid://r66mchjn8lgi" path="res://Inventory_Images/Inventory & chests/1/slots 8x5.png" id="735_kndt2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8kt52"]
 animations = [{
@@ -3844,6 +3845,17 @@ sources/0 = SubResource("TileSetAtlasSource_kyolm")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xtnk3"]
 size = Vector2(131.5, 22)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_r5ntw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("735_kndt2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Market" type="Node2D"]
 script = ExtResource("1_x3uwn")
 
@@ -3926,5 +3938,11 @@ offset_right = 508.0
 offset_bottom = 619.0
 
 [node name="Offer_window_container" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1495, 204)
+scale = Vector2(4.08615, 4.30714)
+sprite_frames = SubResource("SpriteFrames_r5ntw")
 
 [connection signal="pressed" from="Roll" to="." method="_on_roll_pressed"]
