@@ -17,13 +17,11 @@ var hmm = false
 var new_sprite = preload("res://new_sprite.tscn").instantiate()
 var item_placed = false
 func _ready():
-	$Lobby_bg.play("default")
 	get_tree().root.get_node("World").user_detected.connect(New_user_window_creation)
 	$Camera2D.zoom = Vector2(0.945,0.945)
 	for i in range(0,10):
 		$OptionButton.add_item("$ " + str(i), i)
 	$Bunny_Sprite.play("default")
-	$Re_Roll_balance.text = ("Re-Roll-Balance: " + str(re_roll_balance))
 func New_user_window_creation():
 	player_number += 1
 	if len(get_node("Window_container").get_children()) == 0:
@@ -54,44 +52,17 @@ func New_user_window_creation():
 		var sprite = preload("res://new_sprite.tscn").instantiate()
 		window.add_child(sprite)
 func _process(delta):
-	print("server_item_data: " + str(GameManager.Server_item_data))
+	#print("server_item_data: " + str(GameManager.Server_item_data))
+	print("reroll balance " + str(re_roll_balance))
 	"""
 	print("length of server_item_data: " + str(len(GameManager.Server_item_data)))
 	print("Item_count: " + str(Item_count))
 	print(card_formed)
 	"""
 	window_text_live_updates()
-	
-	if card_detected == true and Input.is_action_just_pressed("left_click") and card_formed == false:
-		Item_count += 1
-		var card_sprite = preload("res://new_sprite.tscn").instantiate()
-		card_sprite.name = "fruit_sprite" + str(Item_count)
-		card_sprite.position = Vector2(0,0)
-		get_node("Item_Container").add_child(card_sprite)
-		card_formed = true
-		$AnimationPlayer.play("Flipping_anim")
-	"""
-	elif card_formed == true and Input.is_action_just_pressed("left_click") and card_detected == true:
-		$AnimationPlayer.play("Flipping_anim")
-		"""
-	if Input.is_action_just_pressed("left_click") and on_item == true:
-		held = true
-	elif Input.is_action_just_released("left_click"):
-		held = false
-		
-	if held == true:
-		for i in $Item_Container.get_children():
-			if i.name == "fruit_sprite" + str(Item_count):
-				var pos = get_global_mouse_position()
-				i.global_position = pos
-				
-	if len(GameManager.Server_item_data) == 0 and Item_count > len(GameManager.Server_item_data):
-		for i in $Item_Container.get_children():
-			if Item_count < len($Item_Container.get_children()):
-				i.name = "fruit_sprite" + str(Item_count)
-				Item_count += 1
-			elif Item_count == len($Item_Container.get_children()):
-				i.name = "fruit_sprite"+ str(Item_count)
+	card_shuffle()
+	Item_mouse_movement()
+	$Re_Roll_balance.text = ("Re-Roll-Balance: " + str(re_roll_balance))
 func _on_area_2d_mouse_entered():
 	card_detected = true
 
@@ -147,7 +118,36 @@ func re_roll():
 			i.frame = random_num
 			i.show()
 
-
+func card_shuffle():
+	if card_detected == true and Input.is_action_just_pressed("left_click") and card_formed == false and re_roll_balance > 0:
+		Item_count += 1
+		var card_sprite = preload("res://new_sprite.tscn").instantiate()
+		card_sprite.name = "fruit_sprite" + str(Item_count)
+		card_sprite.position = Vector2(0,0)
+		get_node("Item_Container").add_child(card_sprite)
+		card_formed = true
+		$AnimationPlayer.play("Flipping_anim")
+		re_roll_balance = re_roll_balance-1
+func Item_mouse_movement():
+	if Input.is_action_just_pressed("left_click") and on_item == true:
+		held = true
+	elif Input.is_action_just_released("left_click"):
+		held = false
+		
+	if held == true:
+		for i in $Item_Container.get_children():
+			if i.name == "fruit_sprite" + str(Item_count):
+				var pos = get_global_mouse_position()
+				i.global_position = pos
+				
+	if len(GameManager.Server_item_data) == 0 and Item_count > len(GameManager.Server_item_data):
+		for i in $Item_Container.get_children():
+			if Item_count < len($Item_Container.get_children()):
+				i.name = "fruit_sprite" + str(Item_count)
+				Item_count += 1
+			elif Item_count == len($Item_Container.get_children()):
+				i.name = "fruit_sprite"+ str(Item_count)
+				
 func _on_area_2d_body_entered(body):
 	print(body)
 
@@ -172,7 +172,13 @@ func _on_third_area_area_entered(area):
 		if i.name == "fruit_sprite3":
 			i.global_position = $Item_Position_Container/Third_Item_Space.global_position
 			GameManager.Server_item_data[i.name] = i.frame
-	
+			
+func _on_fourth_area_area_entered(area):
+	card_formed = false
+	for i in $Item_Container.get_children():
+		if i.name == "fruit_sprite4":
+			i.global_position = $Item_Position_Container/Fourth_Item_Space.global_position
+			GameManager.Server_item_data[i.name] = i.frame
 @rpc("any_peer","call_local")
 func offer(Server_item_data,money):
 	pass
@@ -203,3 +209,15 @@ func _on_player_2_offer_pressed():
 	rpc_id(GameManager.Players.keys()[1],"offer",GameManager.Server_item_data,$OptionButton.selected)
 	Item_count -= len(GameManager.Server_item_data)
 	GameManager.Server_item_data = {}
+
+
+func _on_timer_timeout():
+	var random = RandomNumberGenerator.new()
+	var random_num = random.randi_range(1,3)
+	if random_num == 1:
+		$SpeechBubble/RichTextLabel.text = "Click Trade button to offer player some items!"
+	elif random_num == 2:
+		$SpeechBubble/RichTextLabel.text = "Welcome to the Host Lobby!"
+	elif random_num == 3:
+		$SpeechBubble/RichTextLabel.text = "Check out the Sprite Dictionary to see what's worth it!"
+	print($Timer.time_left)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=859 format=3 uid="uid://rrfk3pfar6e6"]
+[gd_scene load_steps=857 format=3 uid="uid://rrfk3pfar6e6"]
 
 [ext_resource type="Script" path="res://market.gd" id="1_x3uwn"]
 [ext_resource type="Texture2D" uid="uid://bhkyu412bkkof" path="res://Vending Machine Art/Vending machine art-0.png" id="2_f3j4h"]
@@ -678,7 +678,6 @@
 [ext_resource type="Texture2D" uid="uid://cpbkhb1pfr7h" path="res://Game_Object_Pixel_Arts/Shopping_Cart_1.png" id="675_28qgb"]
 [ext_resource type="Texture2D" uid="uid://dg1ma00thy56e" path="res://Food Images/Pixel Art Icon Pack - RPG/Equipment/Bag.png" id="675_qrpyr"]
 [ext_resource type="Texture2D" uid="uid://dgokadx8swrx7" path="res://Food Images/Pixel Art Icon Pack - RPG/Equipment/Belt.png" id="676_3n81v"]
-[ext_resource type="PackedScene" uid="uid://egcoeb4np7nm" path="res://Bottle_falling_object/Bottle_falling.tscn" id="676_fbuaq"]
 [ext_resource type="Texture2D" uid="uid://dp212lqg26iqn" path="res://Food Images/Pixel Art Icon Pack - RPG/Equipment/Helm.png" id="677_sw1d2"]
 [ext_resource type="Texture2D" uid="uid://d1k3ypecljalb" path="res://Food Images/Pixel Art Icon Pack - RPG/Equipment/Iron Armor.png" id="678_htr0g"]
 [ext_resource type="Texture2D" uid="uid://bfs7chqlhafkk" path="res://Food Images/Pixel Art Icon Pack - RPG/Equipment/Iron Boot.png" id="679_l6pw0"]
@@ -3842,9 +3841,6 @@ texture = ExtResource("675_28qgb")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_kyolm")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xtnk3"]
-size = Vector2(131.5, 22)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_r5ntw"]
 animations = [{
 "frames": [{
@@ -3910,38 +3906,15 @@ texture = ExtResource("674_kxfp2")
 hframes = 8
 vframes = 8
 
-[node name="RigidBody2D" parent="." instance=ExtResource("676_fbuaq")]
-z_index = 1
-position = Vector2(289, 389)
-
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_cvawu")
 format = 2
-layer_0/tile_data = PackedInt32Array(2490386, 65536, 3, 2490387, 131072, 3, 2490388, 65536, 3, 2490389, 131072, 3, 2490390, 65536, 3, 2490391, 131072, 3, 2490384, 65536, 3, 2490385, 131072, 3, 2490383, 0, 3, 2490392, 196608, 3, 2424848, 65536, 2, 2424849, 131072, 2, 2424850, 65536, 2, 2424851, 131072, 2, 2424852, 65536, 2, 2424853, 131072, 2, 2424854, 65536, 2, 2424855, 131072, 2, 2424856, 196608, 2, 2424847, 0, 2, 2359320, 196608, 1, 2359318, 65536, 1, 2359319, 131072, 1, 2359316, 65536, 1, 2359317, 131072, 1, 2359314, 65536, 1, 2359315, 131072, 1, 2359312, 65536, 1, 2359313, 131072, 1, 2359311, 0, 1, 2293776, 65536, 0, 2293775, 0, 0, 2293784, 196608, 0, 2293783, 131072, 0)
-
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-
-[node name="ShoppingCart1" type="Sprite2D" parent="CharacterBody2D"]
-texture_filter = 1
-position = Vector2(497, 569)
-scale = Vector2(2, 2)
-texture = ExtResource("675_28qgb")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(498.25, 611)
-shape = SubResource("RectangleShape2D_xtnk3")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 40.0
-offset_top = 567.0
-offset_right = 508.0
-offset_bottom = 619.0
 
 [node name="Offer_window_container" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(1495, 204)
+position = Vector2(1658, 206)
 scale = Vector2(4.08615, 4.30714)
 sprite_frames = SubResource("SpriteFrames_r5ntw")
 
