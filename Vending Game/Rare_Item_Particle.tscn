@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://l3bpj2p7nqu0"]
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+amount = 250
+lifetime = 0.3
+emission_shape = 2
+emission_sphere_radius = 20.0
+gravity = Vector2(0, 0)
+scale_amount_min = 0.5
+scale_amount_max = 0.8
+color = Color(1, 1, 0, 1)

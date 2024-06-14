@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=3 uid="uid://grpsgcbt567j"]
+[gd_scene load_steps=92 format=3 uid="uid://grpsgcbt567j"]
 
 [ext_resource type="Script" path="res://market_Host.gd" id="1_og6ng"]
 [ext_resource type="Texture2D" uid="uid://cp4dqugavgvc5" path="res://Convinience store candidate 1.jpg" id="2_grwdt"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://285lww7m8nod" path="res://Host_Market_bunnie/Rabbit_anim-0-removebg-preview.png" id="80_0vg0x"]
 [ext_resource type="Texture2D" uid="uid://8v4bsepw1ohp" path="res://Host_Market_bunnie/Rabbit_anim-1-removebg-preview.png" id="81_wctt6"]
 [ext_resource type="Texture2D" uid="uid://p1vvqwdmbyxa" path="res://Speech Bubble.png" id="81_yvbf8"]
+[ext_resource type="PackedScene" uid="uid://cpkweiucjjnbi" path="res://Book_Open.tscn" id="82_eos8a"]
 [ext_resource type="Texture2D" uid="uid://3wyilx8bk5sj" path="res://Host_Market_bunnie/Rabbit_anim-2-removebg-preview.png" id="82_i6g3q"]
 [ext_resource type="Texture2D" uid="uid://8wl4omkp74j2" path="res://Host_Market_bunnie/Rabbit_anim-3-removebg-preview.png" id="83_r1uq8"]
 [ext_resource type="Texture2D" uid="uid://cbt6fyhq01inq" path="res://Host_Market_bunnie/Rabbit_anim-5-removebg-preview.png" id="84_qdmtv"]
@@ -133,7 +134,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7i7kk"]
-size = Vector2(14, 127)
+size = Vector2(97.75, 127)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dc28a"]
 animations = [{
@@ -438,7 +439,7 @@ texture = ExtResource("78_l0rc5")
 position = Vector2(0, -5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GoldCard/Area2D"]
-position = Vector2(43, 6.77771)
+position = Vector2(1.125, 6.77771)
 shape = SubResource("RectangleShape2D_7i7kk")
 
 [node name="Offer_Button" type="Button" parent="."]
@@ -583,6 +584,16 @@ theme_override_font_sizes/normal_font_size = 150
 text = "Welcome to the
 Host Lobby!"
 
+[node name="Dictionary" parent="." instance=ExtResource("82_eos8a")]
+position = Vector2(1928, 175)
+
+[node name="Dictionary_btn" type="Button" parent="."]
+self_modulate = Color(0, 0, 0, 0)
+offset_left = 44.0
+offset_top = 180.0
+offset_right = 107.0
+offset_bottom = 267.0
+
 [connection signal="mouse_entered" from="GoldCard/Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="GoldCard/Area2D" to="." method="_on_area_2d_mouse_exited"]
 [connection signal="pressed" from="Offer_Button" to="." method="_on_offer_button_pressed"]
@@ -595,3 +606,4 @@ Host Lobby!"
 [connection signal="pressed" from="Player1_Offer" to="." method="_on_player_1_offer_pressed"]
 [connection signal="pressed" from="Player2_Offer" to="." method="_on_player_2_offer_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="Dictionary_btn" to="." method="_on_dictionary_btn_pressed"]

@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://x7dsnohxk2bm"]
+
+[ext_resource type="Texture2D" uid="uid://caucvw1psoil8" path="res://Inventory_Images/Inventory & chests/1/Item describe2.png" id="1_isc2y"]
+[ext_resource type="Texture2D" uid="uid://4gden783pcae" path="res://medal_sprite.png" id="2_k3ig5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlg4s"]
+atlas = ExtResource("2_k3ig5")
+region = Rect2(0, 0, 93, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhpou"]
+atlas = ExtResource("2_k3ig5")
+region = Rect2(93, 0, 93, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtcl5"]
+atlas = ExtResource("2_k3ig5")
+region = Rect2(186, 0, 93, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tptod"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlg4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhpou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtcl5")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Description Tab" type="Node2D"]
+
+[node name="ItemDescribe2" type="Sprite2D" parent="."]
+position = Vector2(71, 45)
+texture = ExtResource("1_isc2y")
+
+[node name="Item_Pointer" type="Node2D" parent="."]
+position = Vector2(15, 13)
+
+[node name="Currency_Label" type="RichTextLabel" parent="."]
+offset_left = 103.0
+offset_top = 1.0
+offset_right = 129.0
+offset_bottom = 24.0
+text = "$"
+
+[node name="Best_Item_Rating" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(45, 14)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_tptod")
+
+[node name="Middle_Rating" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(65, 14)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_tptod")
+frame = 1
+
+[node name="Worst_Rating" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(85, 14)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_tptod")
+frame = 2
+
+[node name="Description" type="RichTextLabel" parent="."]
+offset_left = 5.0
+offset_top = 28.0
+offset_right = 138.0
+offset_bottom = 85.0

@@ -8,6 +8,7 @@ var bottle_list = []
 var server_item_data_client = {}
 var Offer_number = 0
 var money_offered = 0
+var Shiny_container = []
 signal New_bottle_sig
 
 func _ready():
@@ -47,9 +48,10 @@ func testing(client_id,random_num):
 	GameManager.Bottle_data[client_id] = bottle_list[-1]
 
 @rpc("any_peer","call_local")
-func offer(server_item_data,Money):
+func offer(server_item_data,Money,shiny_container):
 	server_item_data_client = server_item_data
 	money_offered = Money
+	Shiny_container = shiny_container
 	"""
 	$RichTextLabel.text = "Server just offered you a item/items to trade!"
 	print("server just offered you a item/items to trade!")
@@ -71,3 +73,7 @@ func offer(server_item_data,Money):
 func _on_area_2d_body_entered(body):
 	print(body)
 """
+
+@rpc("any_peer","call_local")
+func shiny_Identification(shiny_container):
+	Shiny_container = shiny_container

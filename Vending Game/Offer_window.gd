@@ -5,11 +5,12 @@ func _ready():
 	$AnimatedSprite2D.play("default")
 """
 func _process(delta):
-	#print(get_parent().server_item_data_client)
-	delivered_server_item_creation()
+	print(get_parent().get_parent().Shiny_container)
 	"""
 func delivered_server_item_creation():
-	print(GameManager.offer_number)
+	#print(get_parent().get_parent().Shiny_container)
+	#print(get_parent().get_parent().Shiny_container[0][0])
+	#print(GameManager.offer_number)
 	if name == "Offer Window "+ str(GameManager.offer_number):
 		$Speech_Bubble_text.text = "We Offer you $" +str(get_parent().get_parent().money_offered) + " for these items."
 		GameManager.offer_number += 1
@@ -17,10 +18,18 @@ func delivered_server_item_creation():
 		for i in len(get_parent().get_parent().server_item_data_client):
 			var new_sprite = preload("res://new_sprite.tscn").instantiate()
 			new_sprite.frame = get_parent().get_parent().server_item_data_client["fruit_sprite"+str(i+1)]
+			new_sprite.name = str(("fruit_sprite")+str(i+1))
 			new_sprite.position.x += GameManager.item_spacing
 			new_sprite.position.y += 30
 			new_sprite.show()
 			add_child(new_sprite)
+			Shiny_detector(new_sprite)
+			if len(get_parent().get_parent().Shiny_container) >0:
+				for j in get_parent().get_parent().Shiny_container:
+					print(j[0])
+					if new_sprite.name == j[0]:
+						var shiny = preload("res://Rare_Item_Particle.tscn").instantiate()
+						new_sprite.add_child(shiny)
 			GameManager.item_spacing = GameManager.item_spacing + 50
 		get_parent().get_parent().server_item_data_client = {}
 
@@ -30,3 +39,11 @@ func _on_accept_btn_pressed():
 
 func _on_reject_btn_pressed():
 	queue_free()
+
+func Shiny_detector(new_sprite):
+	if len(get_parent().get_parent().Shiny_container) >0:
+		for j in get_parent().get_parent().Shiny_container:
+			print(j[0])
+			if new_sprite.name == j[0]:
+				var shiny = preload("res://Rare_Item_Particle.tscn").instantiate()
+				new_sprite.add_child(shiny)

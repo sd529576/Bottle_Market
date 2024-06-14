@@ -53,7 +53,8 @@ func New_user_window_creation():
 		window.add_child(sprite)
 func _process(delta):
 	#print("server_item_data: " + str(GameManager.Server_item_data))
-	print("reroll balance " + str(re_roll_balance))
+	#print("reroll balance " + str(re_roll_balance))
+	#print(Shiny_Container)
 	"""
 	print("length of server_item_data: " + str(len(GameManager.Server_item_data)))
 	print("Item_count: " + str(Item_count))
@@ -128,6 +129,7 @@ func card_shuffle():
 		card_formed = true
 		$AnimationPlayer.play("Flipping_anim")
 		re_roll_balance = re_roll_balance-1
+		randomizer()
 func Item_mouse_movement():
 	if Input.is_action_just_pressed("left_click") and on_item == true:
 		held = true
@@ -180,27 +182,31 @@ func _on_fourth_area_area_entered(area):
 			i.global_position = $Item_Position_Container/Fourth_Item_Space.global_position
 			GameManager.Server_item_data[i.name] = i.frame
 @rpc("any_peer","call_local")
-func offer(Server_item_data,money):
+func offer(Server_item_data,money,shiny_container):
 	pass
 		
 func _on_offer_button_pressed():
 	for i in GameManager.Server_item_data.keys():
 		for j in $Item_Container.get_children():
-			if i == str(j.name):
+			if i == str(j.name) and len(j.get_children()) == 1:
 				j.queue_free()
+			elif i == str(j.name) and len(j.get_children()) == 2:
+				GameManager.Shiny_Container.append([str(i),"True"])
+				j.queue_free()
+			#elif i == str(j.name) and j.
 	#length of server item data gives the remainder of the items left for the server after offering.
 	if len(GameManager.Players.keys()) == 1:
 		$Player1_Offer.disabled = false
 	elif len(GameManager.Players.keys()) == 2:
 		$Player1_Offer.disabled = false
 		$Player2_Offer.disabled = false
-	print(GameManager.Server_item_data)
+	#print(GameManager.Server_item_data)
 	#GameManager.Server_item_data = {}
 # only show to player1 at the current moment by unabling the player 1 button.
 # still need to figure out how to get an option to choose which player to offer.
 
 func _on_player_1_offer_pressed():
-	rpc_id(GameManager.Players.keys()[0],"offer",GameManager.Server_item_data,$OptionButton.selected)
+	rpc_id(GameManager.Players.keys()[0],"offer",GameManager.Server_item_data,$OptionButton.selected,GameManager.Shiny_Container)
 	Item_count -= len(GameManager.Server_item_data)
 	GameManager.Server_item_data = {}
 
@@ -221,3 +227,18 @@ func _on_timer_timeout():
 	elif random_num == 3:
 		$SpeechBubble/RichTextLabel.text = "Check out the Sprite Dictionary to see what's worth it!"
 	print($Timer.time_left)
+
+@rpc("any_peer","call_local")
+func shiny_Identification(shiny_container):
+	pass
+	
+func randomizer():
+	var random = RandomNumberGenerator.new()
+	var random_num = random.randi_range(1,10)
+	if random_num == 6:
+		var particle = preload("res://Rare_Item_Particle.tscn").instantiate()
+		get_node("Item_Container/fruit_sprite" + str(Item_count)).add_child(particle)
+
+
+func _on_dictionary_btn_pressed():
+	$Dictionary/Camera2D3.make_current()
