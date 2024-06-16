@@ -6,6 +6,7 @@ var default_port = 12345
 @export var client_scene : PackedScene
 var host_pressed = false
 var client_pressed = false
+var host_created = false
 signal user_detected
 
 func _ready():
@@ -43,18 +44,19 @@ func start_server():
 
 func _on_start_game_pressed():
 	if host_pressed == true:
-		start_game_host.rpc_id(1)
+		start_game_host.rpc_id(1,GameManager.host_created)
+		
 	elif client_pressed == true:
 		start_game_client.rpc_id(not 1)
 		
 @rpc("any_peer",'call_local')
-func start_game_host():
+func start_game_host(creation):
 	if host_pressed == true:
 		get_tree().root.add_child(host_scene.instantiate())
 		self.hide()
 		print("wat")
 		host_pressed = false
-
+		print(GameManager.Players)
 @rpc("any_peer","call_local")
 func start_game_client():
 	if client_pressed == true:

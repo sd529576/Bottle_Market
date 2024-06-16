@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://grpsgcbt567j"]
+[gd_scene load_steps=94 format=3 uid="uid://grpsgcbt567j"]
 
 [ext_resource type="Script" path="res://market_Host.gd" id="1_og6ng"]
 [ext_resource type="Texture2D" uid="uid://cp4dqugavgvc5" path="res://Convinience store candidate 1.jpg" id="2_grwdt"]
@@ -10,7 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://p1vvqwdmbyxa" path="res://Speech Bubble.png" id="81_yvbf8"]
 [ext_resource type="PackedScene" uid="uid://cpkweiucjjnbi" path="res://Book_Open.tscn" id="82_eos8a"]
 [ext_resource type="Texture2D" uid="uid://3wyilx8bk5sj" path="res://Host_Market_bunnie/Rabbit_anim-2-removebg-preview.png" id="82_i6g3q"]
+[ext_resource type="PackedScene" uid="uid://bbycdtq5ans3u" path="res://Merchant + Local Store/Merchant.tscn" id="83_37xe5"]
 [ext_resource type="Texture2D" uid="uid://8wl4omkp74j2" path="res://Host_Market_bunnie/Rabbit_anim-3-removebg-preview.png" id="83_r1uq8"]
+[ext_resource type="PackedScene" uid="uid://bahnwt8pq82yo" path="res://Merchant + Local Store/Local_Store.tscn" id="84_0ntiu"]
 [ext_resource type="Texture2D" uid="uid://cbt6fyhq01inq" path="res://Host_Market_bunnie/Rabbit_anim-5-removebg-preview.png" id="84_qdmtv"]
 [ext_resource type="Texture2D" uid="uid://bwgr6cvq7tgev" path="res://Host_Market_bunnie/Rabbit_anim-6-removebg-preview.png" id="85_atcgu"]
 [ext_resource type="Texture2D" uid="uid://bfuttfqah0l7y" path="res://Host_Market_bunnie/Rabbit_anim-8-removebg-preview.png" id="86_ji7l4"]
@@ -452,10 +454,10 @@ text = "OFFER"
 
 [node name="Window_container" type="Node2D" parent="."]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Host_Lobby" type="Camera2D" parent="."]
 position = Vector2(578, 342)
 
-[node name="Camera2D2" type="Camera2D" parent="."]
+[node name="Trade_Lobby" type="Camera2D" parent="."]
 position = Vector2(-1273.25, 307)
 zoom = Vector2(1.1, 1.1)
 
@@ -585,7 +587,7 @@ text = "Welcome to the
 Host Lobby!"
 
 [node name="Dictionary" parent="." instance=ExtResource("82_eos8a")]
-position = Vector2(1928, 175)
+position = Vector2(144, 1164)
 
 [node name="Dictionary_btn" type="Button" parent="."]
 self_modulate = Color(0, 0, 0, 0)
@@ -594,10 +596,19 @@ offset_top = 180.0
 offset_right = 107.0
 offset_bottom = 267.0
 
+[node name="CharacterBody2D" parent="." instance=ExtResource("83_37xe5")]
+position = Vector2(956, 639)
+
+[node name="Local_Store_Screen" type="Camera2D" parent="."]
+position = Vector2(-1238, 1370)
+
+[node name="Local_Store" parent="." instance=ExtResource("84_0ntiu")]
+position = Vector2(-1817, 1039)
+
 [connection signal="mouse_entered" from="GoldCard/Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="GoldCard/Area2D" to="." method="_on_area_2d_mouse_exited"]
 [connection signal="pressed" from="Offer_Button" to="." method="_on_offer_button_pressed"]
-[connection signal="pressed" from="Trade" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Trade" to="." method="_on_trade_pressed"]
 [connection signal="pressed" from="Trading_Back_Btn" to="." method="_on_trading_back_btn_pressed"]
 [connection signal="area_entered" from="Item_Position_Container/First_Item_space/First_Area" to="." method="_on_first_area_area_entered"]
 [connection signal="area_entered" from="Item_Position_Container/Second_Item_space/Second_Area" to="." method="_on_second_area_area_entered"]

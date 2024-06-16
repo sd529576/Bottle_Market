@@ -8,3 +8,4 @@ var Server_item_data = {}
 var offer_number = 0
 var item_spacing = 30
 var Shiny_Container = []
+var host_created = false

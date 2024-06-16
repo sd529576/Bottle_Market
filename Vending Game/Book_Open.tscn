@@ -1,8 +1,9 @@
-[gd_scene load_steps=200 format=3 uid="uid://cpkweiucjjnbi"]
+[gd_scene load_steps=201 format=3 uid="uid://cpkweiucjjnbi"]
 
 [ext_resource type="Texture2D" uid="uid://cdf5ty7u0axdl" path="res://Introvideoanimatedbook-NoCopyrightvideoonline-video-cutter.com-ezgif.com-gif-to-sprite-converter.png" id="1_hffxb"]
 [ext_resource type="Script" path="res://Book_Open.gd" id="1_rjpcg"]
 [ext_resource type="PackedScene" uid="uid://bhrgbg2hhyt75" path="res://new_sprite.tscn" id="2_qob6r"]
+[ext_resource type="PackedScene" uid="uid://x7dsnohxk2bm" path="res://Description_Tab.tscn" id="4_ox26k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_is64i"]
 atlas = ExtResource("1_hffxb")
@@ -1650,7 +1651,7 @@ offset_bottom = 161.0
 text = "Back"
 metadata/_edit_use_anchors_ = true
 
-[node name="Camera2D3" type="Camera2D" parent="."]
+[node name="Dictionary_Lobby" type="Camera2D" parent="."]
 position = Vector2(424, 214)
 
 [node name="Back_To_Lobby" type="Button" parent="."]
@@ -1660,6 +1661,12 @@ offset_top = -101.0
 offset_right = -37.0
 offset_bottom = -62.0
 text = "Back to Lobby"
+
+[node name="Description Tab" parent="." instance=ExtResource("4_ox26k")]
+visible = false
+z_index = 2
+texture_filter = 1
+position = Vector2(369, 155)
 
 [connection signal="pressed" from="Book_Animation/Next_Btn" to="." method="_on_next_btn_pressed"]
 [connection signal="pressed" from="Book_Animation/Back_Btn" to="." method="_on_back_btn_pressed"]

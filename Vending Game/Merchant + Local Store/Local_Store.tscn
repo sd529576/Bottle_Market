@@ -1,0 +1,95 @@
+[gd_scene load_steps=15 format=3 uid="uid://bahnwt8pq82yo"]
+
+[ext_resource type="Script" path="res://Merchant + Local Store/Local_Store.gd" id="1_y0mu5"]
+[ext_resource type="Texture2D" uid="uid://dichrlvfrkn8x" path="res://Merchant + Local Store/Local_Store_design_candidate1/Spritesheets/Spritesheet_UI_Flat.png" id="2_42ol6"]
+[ext_resource type="Texture2D" uid="uid://cktut2othiaix" path="res://Merchant + Local Store/Block2.png" id="3_o4151"]
+[ext_resource type="Texture2D" uid="uid://x6ndqwfio7es" path="res://Pixel Icon Resources/Pixelart_Generic_Icons_v1_by_ReffPixels/Big (120x120) PNG/White/Letter L Black_White.png" id="9_661df"]
+[ext_resource type="Texture2D" uid="uid://du7lmhv3a8r6q" path="res://Pixel Icon Resources/Pixelart_Generic_Icons_v1_by_ReffPixels/Big (120x120) PNG/White/Letter O Black_White.png" id="12_3n6u3"]
+[ext_resource type="Texture2D" uid="uid://b3h8m4dkwx1vc" path="res://Pixel Icon Resources/Pixelart_Generic_Icons_v1_by_ReffPixels/Big (120x120) PNG/White/Letter C Black_White.png" id="13_cfqqw"]
+[ext_resource type="Texture2D" uid="uid://cutkjxuu6h485" path="res://Merchant + Local Store/brown_ver-removebg-preview.png" id="13_sh1mk"]
+[ext_resource type="Texture2D" uid="uid://fqucrl1yjoyx" path="res://Pixel Icon Resources/Pixelart_Generic_Icons_v1_by_ReffPixels/Big (120x120) PNG/White/Letter A Black_White.png" id="14_w72eq"]
+[ext_resource type="Texture2D" uid="uid://dbvhojdpmp507" path="res://Pixel Icon Resources/Pixelart_Generic_Icons_v1_by_ReffPixels/Big (120x120) PNG/Red/Letter S_Red.png" id="16_lfirv"]
+[ext_resource type="Texture2D" uid="uid://egplwlddh2k6" path="res://Pixel Icon Resources/Pixelart_Generic_Icons_v1_by_ReffPixels/Big (120x120) PNG/Red/Letter T_Red.png" id="17_othrf"]
+[ext_resource type="Texture2D" uid="uid://28c54p5l8yon" path="res://Pixel Icon Resources/Pixelart_Generic_Icons_v1_by_ReffPixels/Big (120x120) PNG/Red/Letter O_Red.png" id="18_fjkrt"]
+[ext_resource type="Texture2D" uid="uid://hn3vrcoo5d3a" path="res://Pixel Icon Resources/Pixelart_Generic_Icons_v1_by_ReffPixels/Big (120x120) PNG/Red/Letter R_Red.png" id="19_2rrat"]
+[ext_resource type="Texture2D" uid="uid://bvy7ay8xm2flg" path="res://Pixel Icon Resources/Pixelart_Generic_Icons_v1_by_ReffPixels/Big (120x120) PNG/Red/Letter E_Red.png" id="20_xnaui"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_exfit"]
+
+[node name="Local_Store" type="Node2D"]
+script = ExtResource("1_y0mu5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_exfit")
+
+[node name="SpritesheetUiFlat" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(679, 340)
+texture = ExtResource("2_42ol6")
+
+[node name="Block2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(579.5, 326.75)
+scale = Vector2(2.83863, 1.60122)
+texture = ExtResource("3_o4151")
+
+[node name="Icon_Container" type="Node2D" parent="."]
+
+[node name="LetterOBlackWhite" type="Sprite2D" parent="Icon_Container"]
+position = Vector2(171, 73)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("12_3n6u3")
+
+[node name="LetterLBlackWhite2" type="Sprite2D" parent="Icon_Container"]
+position = Vector2(83, 73)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("9_661df")
+
+[node name="LetterCBlackWhite" type="Sprite2D" parent="Icon_Container"]
+position = Vector2(257, 73)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("13_cfqqw")
+
+[node name="LetterABlackWhite" type="Sprite2D" parent="Icon_Container"]
+position = Vector2(344, 73)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("14_w72eq")
+
+[node name="LetterLBlackWhite3" type="Sprite2D" parent="Icon_Container"]
+position = Vector2(431, 73)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("9_661df")
+
+[node name="LetterSRed" type="Sprite2D" parent="Icon_Container"]
+position = Vector2(206, 169)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("16_lfirv")
+
+[node name="LetterTRed" type="Sprite2D" parent="Icon_Container"]
+position = Vector2(292, 169)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("17_othrf")
+
+[node name="LetterORed" type="Sprite2D" parent="Icon_Container"]
+position = Vector2(378, 169)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("18_fjkrt")
+
+[node name="LetterRRed" type="Sprite2D" parent="Icon_Container"]
+position = Vector2(464, 169)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("19_2rrat")
+
+[node name="LetterERed" type="Sprite2D" parent="Icon_Container"]
+position = Vector2(550, 169)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("20_xnaui")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 323)
+
+[node name="BrownVer-removebg-preview" type="Sprite2D" parent="."]
+position = Vector2(869, 339)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("13_sh1mk")

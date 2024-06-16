@@ -16,9 +16,10 @@ var card_formed = false
 var hmm = false
 var new_sprite = preload("res://new_sprite.tscn").instantiate()
 var item_placed = false
+signal Book_Anim_sig
 func _ready():
 	get_tree().root.get_node("World").user_detected.connect(New_user_window_creation)
-	$Camera2D.zoom = Vector2(0.945,0.945)
+	$Host_Lobby.zoom = Vector2(0.945,0.945)
 	for i in range(0,10):
 		$OptionButton.add_item("$ " + str(i), i)
 	$Bunny_Sprite.play("default")
@@ -63,6 +64,16 @@ func _process(delta):
 	window_text_live_updates()
 	card_shuffle()
 	Item_mouse_movement()
+	
+	if $Host_Lobby.is_current():
+		if len($Window_container.get_children()) >0:
+			for wdow in $Window_container.get_children():
+				wdow.show()
+	else:
+		if len($Window_container.get_children()) >0:
+			for wdow in $Window_container.get_children():
+				wdow.hide()
+				
 	$Re_Roll_balance.text = ("Re-Roll-Balance: " + str(re_roll_balance))
 func _on_area_2d_mouse_entered():
 	card_detected = true
@@ -95,23 +106,19 @@ func window_text_live_updates():
 						label.position = Vector2(200,100)
 						label.show()
 
-func _on_button_2_pressed():
-	$Camera2D2.make_current()
-	if len($Window_container.get_children()) >0:
-		for wdow in $Window_container.get_children():
-			wdow.hide()
-	else:
-		pass
+func _on_trade_pressed():
+	$Trade_Lobby.make_current()
 
 func _on_trading_back_btn_pressed():
-	$Camera2D.make_current()
+	$Host_Lobby.make_current()
 	if len($Window_container.get_children()) >0:
 		for wdow in $Window_container.get_children():
 			wdow.show()
 	else:
 		pass
 
-func re_roll():
+func re_roll
+():
 	var random = RandomNumberGenerator.new()
 	var random_num = random.randi_range(1,170)
 	for i in $Item_Container.get_children():
@@ -241,4 +248,6 @@ func randomizer():
 
 
 func _on_dictionary_btn_pressed():
-	$Dictionary/Camera2D3.make_current()
+	$Dictionary/Dictionary_Lobby.make_current()
+	Book_Anim_sig.emit()
+

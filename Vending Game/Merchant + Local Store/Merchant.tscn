@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://bbycdtq5ans3u"]
+
+[ext_resource type="Texture2D" uid="uid://bbdcbxkw74qys" path="res://Merchant + Local Store/Merchant_spritesheet.png" id="1_hm25q"]
+[ext_resource type="Script" path="res://Merchant + Local Store/Merchant.gd" id="2_i60xf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhtcs"]
+atlas = ExtResource("1_hm25q")
+region = Rect2(0, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80kk4"]
+atlas = ExtResource("1_hm25q")
+region = Rect2(32, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8bpv"]
+atlas = ExtResource("1_hm25q")
+region = Rect2(64, 48, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fdw5"]
+atlas = ExtResource("1_hm25q")
+region = Rect2(96, 48, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n4h8u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhtcs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80kk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8bpv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fdw5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_02pxr"]
+radius = 13.0
+height = 46.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_74g5j"]
+radius = 13.0
+height = 46.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("2_i60xf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_n4h8u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -1)
+shape = SubResource("CapsuleShape2D_02pxr")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3, -1)
+shape = SubResource("CapsuleShape2D_74g5j")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

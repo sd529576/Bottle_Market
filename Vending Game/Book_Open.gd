@@ -1,6 +1,7 @@
 extends Node2D
 
 var book_opened = false
+var screen_locked = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Book_Animation.frame = 0
@@ -8,14 +9,15 @@ func _ready():
 	$Book_Animation/Back_Btn.hide()
 	for i in $Book_Animation/Items.get_children():
 		i.hide()
+	get_parent().Book_Anim_sig.connect(default_anim)
 		
 func _process(delta):
-	if Input.is_action_just_pressed("Enter"):
-		$Book_Animation.play("default")
 	if Input.is_action_just_pressed("left_click") and get_tree().root.get_node("Market").on_item == true:
-		print("Testing123")
+		screen_locked += 1
+		print(screen_locked)
 		
 	show_sprite()
+	
 func show_sprite():
 	if book_opened == false:
 		if $Book_Animation.frame == 194:
@@ -49,4 +51,7 @@ func _on_back_btn_pressed():
 
 
 func _on_back_to_lobby_pressed():
-	get_parent().get_node("Camera2D").make_current()
+	get_parent().get_node("Host_Lobby").make_current()
+
+func default_anim():
+	$Book_Animation.play("default")
