@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://x7dsnohxk2bm"]
+[gd_scene load_steps=11 format=3 uid="uid://x7dsnohxk2bm"]
 
 [ext_resource type="Texture2D" uid="uid://caucvw1psoil8" path="res://Inventory_Images/Inventory & chests/1/Item describe2.png" id="1_isc2y"]
+[ext_resource type="Script" path="res://Description_Tab.gd" id="1_t0cpm"]
 [ext_resource type="Texture2D" uid="uid://4gden783pcae" path="res://medal_sprite.png" id="2_k3ig5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tlg4s"]
@@ -32,8 +33,18 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_e3xuj"]
+radius = 40.0347
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yu0n6"]
+radius = 40.1386
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4i6hw"]
+radius = 41.6666
+
 [node name="Description Tab" type="Node2D"]
 position = Vector2(144, 89)
+script = ExtResource("1_t0cpm")
 
 [node name="ItemDescribe2" type="Sprite2D" parent="."]
 position = Vector2(71, 45)
@@ -46,6 +57,13 @@ position = Vector2(-26, -31)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_tptod")
 
+[node name="Best_Price" type="Area2D" parent="ItemDescribe2/Best_Item_Rating"]
+position = Vector2(-3.05176e-05, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemDescribe2/Best_Item_Rating/Best_Price"]
+position = Vector2(3.33336, 0)
+shape = SubResource("CircleShape2D_e3xuj")
+
 [node name="Middle_Rating" type="AnimatedSprite2D" parent="ItemDescribe2"]
 texture_filter = 1
 position = Vector2(-6, -31)
@@ -53,12 +71,23 @@ scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_tptod")
 frame = 1
 
+[node name="Second Price" type="Area2D" parent="ItemDescribe2/Middle_Rating"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemDescribe2/Middle_Rating/Second Price"]
+shape = SubResource("CircleShape2D_yu0n6")
+
 [node name="Worst_Rating" type="AnimatedSprite2D" parent="ItemDescribe2"]
 texture_filter = 1
 position = Vector2(14, -31)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_tptod")
 frame = 2
+
+[node name="Third Price" type="Area2D" parent="ItemDescribe2/Worst_Rating"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemDescribe2/Worst_Rating/Third Price"]
+position = Vector2(-3.33331, 0)
+shape = SubResource("CircleShape2D_4i6hw")
 
 [node name="Item_Pointer" type="Node2D" parent="ItemDescribe2"]
 position = Vector2(-56, -32)
@@ -77,3 +106,10 @@ offset_top = -6.0
 offset_right = 270.0
 offset_bottom = 164.0
 metadata/_edit_use_anchors_ = true
+
+[connection signal="mouse_entered" from="ItemDescribe2/Best_Item_Rating/Best_Price" to="." method="_on_best_price_mouse_entered"]
+[connection signal="mouse_exited" from="ItemDescribe2/Best_Item_Rating/Best_Price" to="." method="_on_best_price_mouse_exited"]
+[connection signal="mouse_entered" from="ItemDescribe2/Middle_Rating/Second Price" to="." method="_on_second_price_mouse_entered"]
+[connection signal="mouse_exited" from="ItemDescribe2/Middle_Rating/Second Price" to="." method="_on_second_price_mouse_exited"]
+[connection signal="mouse_entered" from="ItemDescribe2/Worst_Rating/Third Price" to="." method="_on_third_price_mouse_entered"]
+[connection signal="mouse_exited" from="ItemDescribe2/Worst_Rating/Third Price" to="." method="_on_third_price_mouse_exited"]

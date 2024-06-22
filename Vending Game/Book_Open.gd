@@ -2,6 +2,7 @@ extends Node2D
 
 var book_opened = false
 var screen_locked = 0
+var dictionary_opened = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Book_Animation.frame = 0
@@ -52,6 +53,7 @@ func _on_back_btn_pressed():
 
 func _on_back_to_lobby_pressed():
 	get_parent().get_node("Host_Lobby").make_current()
-
+	dictionary_opened = false
 func default_anim():
 	$Book_Animation.play("default")
+	dictionary_opened = true

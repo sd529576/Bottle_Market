@@ -733,7 +733,8 @@
 [ext_resource type="Texture2D" uid="uid://ik60bl76n41d" path="res://Food Images/Pixel Art Icon Pack - RPG/Monster Part/Monster Meat.png" id="729_arcxt"]
 [ext_resource type="Texture2D" uid="uid://8rm3dh8wuq1d" path="res://Food Images/Pixel Art Icon Pack - RPG/Monster Part/Skull.png" id="730_w1j8b"]
 [ext_resource type="Texture2D" uid="uid://8g473vt2rv33" path="res://Food Images/Pixel Art Icon Pack - RPG/Monster Part/Slime Gel.png" id="731_t2tkt"]
-[ext_resource type="Texture2D" uid="uid://r66mchjn8lgi" path="res://Inventory_Images/Inventory & chests/1/slots 8x5.png" id="735_kndt2"]
+[ext_resource type="PackedScene" uid="uid://bbycdtq5ans3u" path="res://Merchant + Local Store/Merchant.tscn" id="735_285i7"]
+[ext_resource type="PackedScene" uid="uid://bahnwt8pq82yo" path="res://Merchant + Local Store/Local_Store.tscn" id="736_03e86"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8kt52"]
 animations = [{
@@ -3841,17 +3842,6 @@ texture = ExtResource("675_28qgb")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_kyolm")
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_r5ntw"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("735_kndt2")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [node name="Market" type="Node2D"]
 script = ExtResource("1_x3uwn")
 
@@ -3912,10 +3902,32 @@ format = 2
 
 [node name="Offer_window_container" type="Node2D" parent="."]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-texture_filter = 1
-position = Vector2(1658, 206)
-scale = Vector2(4.08615, 4.30714)
-sprite_frames = SubResource("SpriteFrames_r5ntw")
+[node name="CharacterBody2D" parent="." instance=ExtResource("735_285i7")]
+position = Vector2(937, 621)
+
+[node name="Local_Store_Screen" type="Camera2D" parent="."]
+position = Vector2(584, 1497)
+
+[node name="Local_Store" parent="." instance=ExtResource("736_03e86")]
+position = Vector2(5, 1166)
+
+[node name="Main_Lobby" type="Camera2D" parent="."]
+position = Vector2(577, 324)
+
+[node name="Client_Balance" type="RichTextLabel" parent="."]
+offset_left = 6.0
+offset_top = 30.0
+offset_right = 230.0
+offset_bottom = 110.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+
+[node name="Client_Balance_Local" type="RichTextLabel" parent="."]
+offset_left = 777.0
+offset_top = 1202.0
+offset_right = 1001.0
+offset_bottom = 1282.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
 
 [connection signal="pressed" from="Roll" to="." method="_on_roll_pressed"]

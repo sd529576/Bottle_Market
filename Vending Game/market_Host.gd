@@ -55,7 +55,7 @@ func New_user_window_creation():
 func _process(delta):
 	#print("server_item_data: " + str(GameManager.Server_item_data))
 	#print("reroll balance " + str(re_roll_balance))
-	#print(Shiny_Container)
+	#print(GameManager.Shiny_Container)
 	"""
 	print("length of server_item_data: " + str(len(GameManager.Server_item_data)))
 	print("Item_count: " + str(Item_count))
@@ -216,13 +216,13 @@ func _on_player_1_offer_pressed():
 	rpc_id(GameManager.Players.keys()[0],"offer",GameManager.Server_item_data,$OptionButton.selected,GameManager.Shiny_Container)
 	Item_count -= len(GameManager.Server_item_data)
 	GameManager.Server_item_data = {}
-
+	GameManager.Shiny_Container = []
 
 func _on_player_2_offer_pressed():
 	rpc_id(GameManager.Players.keys()[1],"offer",GameManager.Server_item_data,$OptionButton.selected)
 	Item_count -= len(GameManager.Server_item_data)
 	GameManager.Server_item_data = {}
-
+	GameManager.Shiny_Container = []
 
 func _on_timer_timeout():
 	var random = RandomNumberGenerator.new()
@@ -241,8 +241,8 @@ func shiny_Identification(shiny_container):
 	
 func randomizer():
 	var random = RandomNumberGenerator.new()
-	var random_num = random.randi_range(1,10)
-	if random_num == 6:
+	var random_num = random.randi_range(1,4)
+	if random_num == 3:
 		var particle = preload("res://Rare_Item_Particle.tscn").instantiate()
 		get_node("Item_Container/fruit_sprite" + str(Item_count)).add_child(particle)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bahnwt8pq82yo"]
+[gd_scene load_steps=17 format=3 uid="uid://bahnwt8pq82yo"]
 
 [ext_resource type="Script" path="res://Merchant + Local Store/Local_Store.gd" id="1_y0mu5"]
 [ext_resource type="Texture2D" uid="uid://dichrlvfrkn8x" path="res://Merchant + Local Store/Local_Store_design_candidate1/Spritesheets/Spritesheet_UI_Flat.png" id="2_42ol6"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://x6ndqwfio7es" path="res://Pixel Icon Resources/Pixelart_Generic_Icons_v1_by_ReffPixels/Big (120x120) PNG/White/Letter L Black_White.png" id="9_661df"]
 [ext_resource type="Texture2D" uid="uid://du7lmhv3a8r6q" path="res://Pixel Icon Resources/Pixelart_Generic_Icons_v1_by_ReffPixels/Big (120x120) PNG/White/Letter O Black_White.png" id="12_3n6u3"]
 [ext_resource type="Texture2D" uid="uid://b3h8m4dkwx1vc" path="res://Pixel Icon Resources/Pixelart_Generic_Icons_v1_by_ReffPixels/Big (120x120) PNG/White/Letter C Black_White.png" id="13_cfqqw"]
-[ext_resource type="Texture2D" uid="uid://cutkjxuu6h485" path="res://Merchant + Local Store/brown_ver-removebg-preview.png" id="13_sh1mk"]
+[ext_resource type="Texture2D" uid="uid://cfdvueoe1f5ig" path="res://Pixel Icon Resources/Pixelart_Generic_Icons_v1_by_ReffPixels/Big (120x120) PNG/Lightblue/House_Lightblue.png" id="13_cq3at"]
 [ext_resource type="Texture2D" uid="uid://fqucrl1yjoyx" path="res://Pixel Icon Resources/Pixelart_Generic_Icons_v1_by_ReffPixels/Big (120x120) PNG/White/Letter A Black_White.png" id="14_w72eq"]
 [ext_resource type="Texture2D" uid="uid://dbvhojdpmp507" path="res://Pixel Icon Resources/Pixelart_Generic_Icons_v1_by_ReffPixels/Big (120x120) PNG/Red/Letter S_Red.png" id="16_lfirv"]
 [ext_resource type="Texture2D" uid="uid://egplwlddh2k6" path="res://Pixel Icon Resources/Pixelart_Generic_Icons_v1_by_ReffPixels/Big (120x120) PNG/Red/Letter T_Red.png" id="17_othrf"]
@@ -15,6 +15,12 @@
 [ext_resource type="Texture2D" uid="uid://bvy7ay8xm2flg" path="res://Pixel Icon Resources/Pixelart_Generic_Icons_v1_by_ReffPixels/Big (120x120) PNG/Red/Letter E_Red.png" id="20_xnaui"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_exfit"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8js8c"]
+bg_color = Color(0.243137, 0.843137, 0.576471, 0.65098)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2psx4"]
+size = Vector2(76.5, 76.5)
 
 [node name="Local_Store" type="Node2D"]
 script = ExtResource("1_y0mu5")
@@ -92,4 +98,99 @@ position = Vector2(576, 323)
 [node name="BrownVer-removebg-preview" type="Sprite2D" parent="."]
 position = Vector2(869, 339)
 scale = Vector2(1.2, 1.2)
-texture = ExtResource("13_sh1mk")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 75.0
+offset_top = 257.0
+offset_right = 405.0
+offset_bottom = 587.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8js8c")
+
+[node name="Panel2" type="Panel" parent="."]
+offset_left = 773.0
+offset_top = 261.0
+offset_right = 1103.0
+offset_bottom = 591.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8js8c")
+
+[node name="Panel3" type="Panel" parent="."]
+offset_left = 425.0
+offset_top = 259.0
+offset_right = 755.0
+offset_bottom = 589.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8js8c")
+
+[node name="Item1" type="Node2D" parent="."]
+position = Vector2(237, 319)
+
+[node name="Item1_sell_btn" type="Button" parent="Item1"]
+offset_left = -64.0
+offset_top = 101.0
+offset_right = 83.0
+offset_bottom = 146.0
+text = "Sell"
+
+[node name="Item1_Price" type="RichTextLabel" parent="Item1"]
+offset_left = -36.0
+offset_top = 31.0
+offset_right = 42.0
+offset_bottom = 76.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+text = "$"
+
+[node name="Item2" type="Node2D" parent="."]
+position = Vector2(581, 319)
+
+[node name="Item2_Price" type="RichTextLabel" parent="Item2"]
+offset_left = -46.0
+offset_top = 31.0
+offset_right = 45.0
+offset_bottom = 77.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+text = "$"
+
+[node name="Item2_sell_btn" type="Button" parent="Item2"]
+offset_left = -76.0
+offset_top = 99.0
+offset_right = 75.0
+offset_bottom = 152.0
+text = "Sell"
+
+[node name="Item3" type="Node2D" parent="."]
+position = Vector2(939, 321)
+
+[node name="Item3_Price" type="RichTextLabel" parent="Item3"]
+offset_left = -46.0
+offset_top = 31.0
+offset_right = 56.0
+offset_bottom = 78.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 30
+text = "$"
+
+[node name="Item3_sell_btn" type="Button" parent="Item3"]
+offset_left = -76.0
+offset_top = 98.0
+offset_right = 80.0
+offset_bottom = 153.0
+text = "Sell"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="HouseLightblue" type="Sprite2D" parent="Area2D"]
+texture_filter = 1
+position = Vector2(1068, 76)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("13_cq3at")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1069.75, 76.75)
+shape = SubResource("RectangleShape2D_2psx4")
+
+[connection signal="pressed" from="Item1/Item1_sell_btn" to="." method="_on_item_1_sell_btn_pressed"]
+[connection signal="pressed" from="Item2/Item2_sell_btn" to="." method="_on_item_2_sell_btn_pressed"]
+[connection signal="pressed" from="Item3/Item3_sell_btn" to="." method="_on_item_3_sell_btn_pressed"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

@@ -9,22 +9,37 @@ var server_item_data_client = {}
 var Offer_number = 0
 var money_offered = 0
 var Shiny_container = []
+var item_counter = 0
+var balance = 20
 signal New_bottle_sig
 
 func _ready():
 	$Background_animation.play("default")
+	$Main_Lobby.make_current()
 #@rpc('any_peer',"call_local")
 func host_animation():
 	$Vending_Machine_anim.play("Main_Animation")
 func _on_roll_pressed():
-	host_animation()
-	var random = RandomNumberGenerator.new()
-	var random_num = random.randi_range(1,170)
-	rpc_id(1,"testing",multiplayer.get_unique_id(),random_num)
-	testing(multiplayer.get_unique_id(),random_num)
+	if balance - 3 > 0:
+		host_animation()
+		var random = RandomNumberGenerator.new()
+		var random_num = random.randi_range(1,170)
+		rpc_id(1,"testing",multiplayer.get_unique_id(),random_num)
+		testing(multiplayer.get_unique_id(),random_num)
+		
+		var selling_item = preload("res://description_sprite.tscn").instantiate()
+		#[1,3]
+		if len(bottle_list) > 0 and item_counter <3:
+			selling_item.frame = bottle_list[item_counter]
+			selling_item.scale = Vector2(1.5,1.5)
+			selling_item.show()
+			get_node("Local_Store/Item"+str(item_counter+1)).add_child(selling_item)
+		item_counter += 1
+		balance -= 3
 	#print(GameManager.Bottle_data)
 func _physics_process(delta):
 	#print(GameManager.Bottle_data)
+	print(bottle_list)
 	if $Vending_Machine_anim.frame > 255:
 		$Vending_Machine_anim.frame = 0
 		$Vending_Machine_anim.stop()
@@ -38,6 +53,9 @@ func _physics_process(delta):
 			$Window/AnimatedSprite2D.frame = bottle_list[len(bottle_list)-1]
 			$Window/AnimatedSprite2D.show()
 			$Window/Gatcha_Simulation.hide()
+			
+	$Client_Balance.text = "Balance: $ " +str(balance)
+	$Client_Balance_Local.text = "Balance: $ " +str(balance)
 	#print(bottle_list)
 	#print(bottle_list)
 	
