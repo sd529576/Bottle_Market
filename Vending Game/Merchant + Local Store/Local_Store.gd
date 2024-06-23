@@ -6,13 +6,14 @@ var org_length = null
 var Price = []
 var item_counter = 1
 var selling_item = preload("res://description_sprite.tscn").instantiate()
+var re_stocking_needed = 3
 
-func _ready():
-	get_tree().root.get_node("Market/CharacterBody2D").Local_store_clicked.connect(price_display)
 func _physics_process(delta):
 	if Home_Btn == true and Input.is_action_just_pressed("left_click"):
 		get_tree().root.get_node("Market/Main_Lobby").make_current()
-	
+		if re_stocking_needed == 0:
+			re_stocking_needed = 3
+			get_parent().item_counter = 0
 	#[1,3]
 	print(len(get_tree().root.get_node("Market").bottle_list))
 	
@@ -25,18 +26,6 @@ func _on_area_2d_mouse_exited():
 
 func price_display():
 	print($Item1.get_children())
-	if len($Item1.get_children()) >2 and len(Price) == 0:
-		var price1 = Price_randomizer.randi_range(1,10)
-		$Item1/Item1_Price.text += str(price1)
-		Price.append(price1)
-	if len($Item2.get_children()) > 2 and len(Price) == 1:
-		var price2 = Price_randomizer.randi_range(1,10)
-		$Item2/Item2_Price.text += str(price2)
-		Price.append(price2)
-	if len($Item3.get_children()) > 2 and len(Price) == 2:
-		var price3 = Price_randomizer.randi_range(1,10)
-		$Item3/Item3_Price.text += str(price3)
-		Price.append(price3)
 	print(Price)
 #Local_Store/Item1/Description_Sprite
 
@@ -50,6 +39,9 @@ func _on_item_1_sell_btn_pressed():
 						get_tree().root.get_node("Market").bottle_list.remove_at(i)
 						$Item1/Item1_sell_btn.disabled = true
 						get_tree().root.get_node("Market").balance += Price[0]
+						re_stocking_needed -=1
+						j.hide()
+						$Item1/Item1_Price.hide()
 func _on_item_2_sell_btn_pressed():
 	org_length = len(get_tree().root.get_node("Market").bottle_list) # 1 -> [24,67]
 	for j in $Item2.get_children():
@@ -60,6 +52,9 @@ func _on_item_2_sell_btn_pressed():
 						get_tree().root.get_node("Market").bottle_list.remove_at(i)
 						$Item2/Item2_sell_btn.disabled = true
 						get_tree().root.get_node("Market").balance += Price[1]
+						re_stocking_needed -=1
+						j.hide()
+						$Item2/Item2_Price.hide()
 func _on_item_3_sell_btn_pressed():
 	org_length = len(get_tree().root.get_node("Market").bottle_list) # 1 -> [24,67]
 	for j in $Item3.get_children():
@@ -71,3 +66,6 @@ func _on_item_3_sell_btn_pressed():
 						get_tree().root.get_node("Market").bottle_list.remove_at(i)
 						$Item3/Item3_sell_btn.disabled = true
 						get_tree().root.get_node("Market").balance += Price[2]
+						re_stocking_needed -=1
+						j.hide()
+						$Item3/Item3_Price.hide()

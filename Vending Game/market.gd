@@ -26,7 +26,7 @@ func _on_roll_pressed():
 		var random_num = random.randi_range(1,170)
 		rpc_id(1,"testing",multiplayer.get_unique_id(),random_num)
 		testing(multiplayer.get_unique_id(),random_num)
-		
+		"""
 		var selling_item = preload("res://description_sprite.tscn").instantiate()
 		#[1,3]
 		if len(bottle_list) > 0 and item_counter <3:
@@ -35,11 +35,13 @@ func _on_roll_pressed():
 			selling_item.show()
 			get_node("Local_Store/Item"+str(item_counter+1)).add_child(selling_item)
 		item_counter += 1
+		"""
 		balance -= 3
 	#print(GameManager.Bottle_data)
 func _physics_process(delta):
 	#print(GameManager.Bottle_data)
 	print(bottle_list)
+	#print(item_counter)
 	if $Vending_Machine_anim.frame > 255:
 		$Vending_Machine_anim.frame = 0
 		$Vending_Machine_anim.stop()
@@ -95,3 +97,13 @@ func _on_area_2d_body_entered(body):
 @rpc("any_peer","call_local")
 func shiny_Identification(shiny_container):
 	Shiny_container = shiny_container
+
+
+func _on_timer_timeout():
+	if len(bottle_list) == 3:
+		for i in len(bottle_list):
+			var selling_item = preload("res://description_sprite.tscn").instantiate()
+			selling_item.frame = bottle_list[i]
+			selling_item.scale = Vector2(1.5,1.5)
+			selling_item.show()
+			get_node("Local_Store/Item"+str(i+1)).add_child(selling_item)

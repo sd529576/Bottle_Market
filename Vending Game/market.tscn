@@ -3930,4 +3930,7 @@ offset_bottom = 1282.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 30
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="pressed" from="Roll" to="." method="_on_roll_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

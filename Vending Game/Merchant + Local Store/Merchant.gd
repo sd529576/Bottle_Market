@@ -17,6 +17,21 @@ func _physics_process(delta):
 	if Character_on == true and Input.is_action_just_pressed("left_click"):
 		Local_store_clicked.emit()
 		get_tree().root.get_node("Market/Local_Store_Screen").make_current()
+		if len(get_tree().root.get_node("Market").bottle_list) > 0 and len(get_tree().root.get_node("Market").bottle_list) < 4:
+			for i in len(get_tree().root.get_node("Market").bottle_list):
+				var selling_item = preload("res://description_sprite.tscn").instantiate()
+				selling_item.frame = get_tree().root.get_node("Market").bottle_list[i]
+				selling_item.scale = Vector2(1.5,1.5)
+				selling_item.show()
+				get_parent().get_node("Local_Store/Item"+str(i+1)).add_child(selling_item)
+		elif len(get_tree().root.get_node("Market").bottle_list)> 3:
+			for i in 3:
+				var selling_item = preload("res://description_sprite.tscn").instantiate()
+				selling_item.frame = get_tree().root.get_node("Market").bottle_list[i]
+				selling_item.scale = Vector2(1.5,1.5)
+				selling_item.show()
+				get_parent().get_node("Local_Store/Item"+str(i+1)).add_child(selling_item)
+		price_display()
 		"""
 		for i in len(get_tree().root.get_node("Market").bottle_list):
 			var selling_item = preload("res://description_sprite.tscn").instantiate()
@@ -43,3 +58,17 @@ func _on_area_2d_mouse_entered():
 
 func _on_area_2d_mouse_exited():
 	Character_on = false
+
+func price_display():
+	if len(get_parent().get_node("Local_Store/Item1").get_children()) >2 and len(get_parent().get_node("Local_Store").Price) == 0:
+		var price1 = get_parent().get_node("Local_Store").Price_randomizer.randi_range(1,10)
+		get_parent().get_node("Local_Store/Item1/Item1_Price").text += str(price1)
+		get_parent().get_node("Local_Store").Price.append(price1)
+	if len(get_parent().get_node("Local_Store/Item2").get_children()) > 2 and len(get_parent().get_node("Local_Store").Price) == 1:
+		var price2 = get_parent().get_node("Local_Store").Price_randomizer.randi_range(1,10)
+		get_parent().get_node("Local_Store/Item2/Item2_Price").text += str(price2)
+		get_parent().get_node("Local_Store").Price.append(price2)
+	if len(get_parent().get_node("Local_Store/Item3").get_children()) > 2 and len(get_parent().get_node("Local_Store").Price) == 2:
+		var price3 = get_parent().get_node("Local_Store").Price_randomizer.randi_range(1,10)
+		get_parent().get_node("Local_Store/Item3/Item3_Price").text += str(price3)
+		get_parent().get_node("Local_Store").Price.append(price3)
