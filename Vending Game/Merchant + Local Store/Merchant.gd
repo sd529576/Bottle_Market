@@ -5,6 +5,7 @@ const SPEED = 50
 var Character_on = false
 signal Local_store_clicked
 var org_length = 0
+var back_to_normal = false
 #var item_counter = 0
 func _ready():
 	$AnimatedSprite2D.play("default")
@@ -12,6 +13,9 @@ func _ready():
 func _physics_process(delta):
 	velocity.x = -SPEED
 	
+	if back_to_normal == true:
+		position.x = 1000
+		back_to_normal = false
 	move_and_slide()
 	
 	if Character_on == true and Input.is_action_just_pressed("left_click"):
@@ -72,3 +76,9 @@ func price_display():
 		var price3 = get_parent().get_node("Local_Store").Price_randomizer.randi_range(1,10)
 		get_parent().get_node("Local_Store/Item3/Item3_Price").text += str(price3)
 		get_parent().get_node("Local_Store").Price.append(price3)
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	back_to_normal = true
+	print("Working?")
+	

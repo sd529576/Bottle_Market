@@ -15,7 +15,7 @@ func _physics_process(delta):
 			re_stocking_needed = 3
 			get_parent().item_counter = 0
 	#[1,3]
-	print(len(get_tree().root.get_node("Market").bottle_list))
+	#print(len(get_tree().root.get_node("Market").bottle_list))
 	
 func _on_area_2d_mouse_entered():
 	Home_Btn = true

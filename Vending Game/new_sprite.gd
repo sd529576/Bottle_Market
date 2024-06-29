@@ -4,10 +4,12 @@ var frame1 = 0
 var name1 = ""
 var File = "res://Item_Description.txt"
 var Item_description = {}
+var self_name = null
 #var Item_description1 = {0: "Solid Apple, so normal that it’s strange.",1: "Green Pear, might be a little sour to eat.",2: "Abundant Grape, can’t even count how many", 3: "BANANA, BANANANANA",4:"Single Banana, why would they only sell one single banana?",5:"Watermelon, might have to use a kitchen knife to cut it.",6:"One Slice of Watermelon, looks delicious enough.",7:"Watermelon and a HALF, this can definitely feed the whole family.",8:"Peach Lover, we do lovin peach peach",9:"A Persimmon, My dad loves this fruit.",10:"An Orange, Could potentially be really sour",11:"an Egg Plant, I can't eat this but some people love it.",12:"Cherry, looks really good on cocktails",13:"Yellow LemonLEmon, SOURRRRRrrrrr",14:"Green Lemon, this might actually be more sour than yellow lemon.",15:"KiWI, My favorite. seems to be "}
 signal on_item_signal
 
 func _on_area_2d_mouse_entered():
+	self_name = name
 	if frame in GameManager.Price_Tracker.keys():
 		pass
 	elif frame not in GameManager.Price_Tracker.keys():
@@ -26,6 +28,7 @@ func _on_area_2d_mouse_entered():
 		#print(name)
 		get_tree().root.get_node("Market/Dictionary/Description Tab").show()
 func _on_area_2d_mouse_exited():
+	self_name = null
 	get_tree().root.get_node("Market").on_item = false
 	if get_tree().root.get_node("Market/Dictionary").dictionary_opened == true:
 		if get_tree().root.get_node("Market/Dictionary").screen_locked %2 == 0:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://grpsgcbt567j"]
+[gd_scene load_steps=95 format=3 uid="uid://grpsgcbt567j"]
 
 [ext_resource type="Script" path="res://market_Host.gd" id="1_og6ng"]
 [ext_resource type="Texture2D" uid="uid://cp4dqugavgvc5" path="res://Convinience store candidate 1.jpg" id="2_grwdt"]
@@ -10,9 +10,12 @@
 [ext_resource type="Texture2D" uid="uid://p1vvqwdmbyxa" path="res://Speech Bubble.png" id="81_yvbf8"]
 [ext_resource type="PackedScene" uid="uid://cpkweiucjjnbi" path="res://Book_Open.tscn" id="82_eos8a"]
 [ext_resource type="Texture2D" uid="uid://3wyilx8bk5sj" path="res://Host_Market_bunnie/Rabbit_anim-2-removebg-preview.png" id="82_i6g3q"]
+[ext_resource type="PackedScene" uid="uid://y1xrxm2rtv5k" path="res://Inventory Tab.tscn" id="83_oyha7"]
 [ext_resource type="Texture2D" uid="uid://8wl4omkp74j2" path="res://Host_Market_bunnie/Rabbit_anim-3-removebg-preview.png" id="83_r1uq8"]
+[ext_resource type="Script" path="res://Marker2D.gd" id="84_8te6r"]
 [ext_resource type="Texture2D" uid="uid://cbt6fyhq01inq" path="res://Host_Market_bunnie/Rabbit_anim-5-removebg-preview.png" id="84_qdmtv"]
 [ext_resource type="Texture2D" uid="uid://bwgr6cvq7tgev" path="res://Host_Market_bunnie/Rabbit_anim-6-removebg-preview.png" id="85_atcgu"]
+[ext_resource type="PackedScene" uid="uid://dpwbdn4gntgaa" path="res://Damage_notif/damage_notf.tscn" id="85_qfq77"]
 [ext_resource type="Texture2D" uid="uid://bfuttfqah0l7y" path="res://Host_Market_bunnie/Rabbit_anim-8-removebg-preview.png" id="86_ji7l4"]
 [ext_resource type="Texture2D" uid="uid://rn7iwq5j5ybf" path="res://Host_Market_bunnie/Rabbit_anim-12-removebg-preview.png" id="87_vs8rp"]
 [ext_resource type="Texture2D" uid="uid://bepfo2iaf8662" path="res://Host_Market_bunnie/Rabbit_anim-14-removebg-preview.png" id="88_ekr3p"]
@@ -488,7 +491,7 @@ text = "Re-Roll Balance:
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-1299, 202)
+position = Vector2(-1111.68, 200)
 scale = Vector2(4.08615, 4.30714)
 sprite_frames = SubResource("SpriteFrames_dc28a")
 
@@ -498,11 +501,13 @@ sprite_frames = SubResource("SpriteFrames_dc28a")
 position = Vector2(600, 300)
 
 [node name="Bunny_Sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(-923, 418)
+position = Vector2(-957, 467)
+scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_wn6g5")
 frame_progress = 0.626052
 
 [node name="Item_Position_Container" type="Node2D" parent="."]
+position = Vector2(187.317, -2)
 
 [node name="First_Item_space" type="Node2D" parent="Item_Position_Container"]
 position = Vector2(-1404, 126)
@@ -544,10 +549,10 @@ position = Vector2(-0.75, 34)
 shape = SubResource("RectangleShape2D_4kbey")
 
 [node name="Player1_Offer" type="Button" parent="."]
-offset_left = -1016.0
-offset_top = 166.0
-offset_right = -921.0
-offset_bottom = 211.0
+offset_left = -1117.0
+offset_top = 412.0
+offset_right = -1022.0
+offset_bottom = 457.0
 disabled = true
 text = "Player1"
 
@@ -558,10 +563,10 @@ offset_right = -1043.0
 offset_bottom = 380.0
 
 [node name="Player2_Offer" type="Button" parent="."]
-offset_left = -1015.0
-offset_top = 254.0
-offset_right = -920.0
-offset_bottom = 299.0
+offset_left = -874.0
+offset_top = 416.0
+offset_right = -779.0
+offset_bottom = 461.0
 disabled = true
 text = "Player2"
 
@@ -593,6 +598,15 @@ offset_left = 44.0
 offset_top = 180.0
 offset_right = 107.0
 offset_bottom = 267.0
+
+[node name="Inventory Tab" parent="." instance=ExtResource("83_oyha7")]
+position = Vector2(-1496, 178)
+scale = Vector2(3, 3)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-1153, 489)
+script = ExtResource("84_8te6r")
+damage_node = ExtResource("85_qfq77")
 
 [connection signal="mouse_entered" from="GoldCard/Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="GoldCard/Area2D" to="." method="_on_area_2d_mouse_exited"]

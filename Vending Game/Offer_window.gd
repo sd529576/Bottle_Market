@@ -1,4 +1,5 @@
 extends Window
+var credit = 0
 
 func _ready():
 	get_parent().get_parent().New_bottle_sig.connect(delivered_server_item_creation)
@@ -13,7 +14,6 @@ func delivered_server_item_creation():
 	#print(GameManager.offer_number)
 	if name == "Offer Window "+ str(GameManager.offer_number):
 		$Speech_Bubble_text.text = "We Offer you $" +str(get_parent().get_parent().money_offered) + " for these items."
-		GameManager.offer_number += 1
 		GameManager.item_spacing = 20
 		for i in len(get_parent().get_parent().server_item_data_client):
 			var new_sprite = preload("res://new_sprite.tscn").instantiate()
@@ -34,9 +34,20 @@ func delivered_server_item_creation():
 		get_parent().get_parent().server_item_data_client = {}
 
 func _on_accept_btn_pressed():
-	print("Accepted Offer")
-
-
+	# This is when you don't have money to accept the offer.
+	if get_tree().root.get_node("Market").balance < get_parent().get_parent().money_offered:
+		print("you don't have enough money..")
+	# This is when you have enough money to accept the offer scenario.
+	elif get_tree().root.get_node("Market").balance >= get_parent().get_parent().money_offered:
+		get_tree().root.get_node("Market").balance -= get_parent().get_parent().money_offered
+		print("you accepted the offer!")
+				#to only get values from the list.
+		for i in len(get_tree().root.get_node("Market").offer_list_with_values[GameManager.offer_number])-1:
+			print(i)
+			get_tree().root.get_node("Market").Collection.append(get_tree().root.get_node("Market").offer_list_with_values[GameManager.offer_number][i])
+		
+		get_tree().root.get_node("Market").moneyandreroll_transaction.rpc_id(1,get_parent().get_parent().money_offered)
+		queue_free()
 func _on_reject_btn_pressed():
 	queue_free()
 

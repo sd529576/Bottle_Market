@@ -5,12 +5,15 @@ var Bottle_dict = {}
 var called = false
 var number = 0
 var bottle_list = []
-var server_item_data_client = {}
+var server_item_data_client = {} # organizes offered items into fruit_sprite# = sprite_number
+var offer_list_with_values = {} # organizes the number of offer and sprites that belong to each offer #
 var Offer_number = 0
 var money_offered = 0
 var Shiny_container = []
 var item_counter = 0
 var balance = 20
+var offer_counter = 0
+var Collection = []
 signal New_bottle_sig
 
 func _ready():
@@ -42,6 +45,8 @@ func _physics_process(delta):
 	#print(GameManager.Bottle_data)
 	print(bottle_list)
 	#print(item_counter)
+	#print(server_item_data_client)
+	#print(Collection)
 	if $Vending_Machine_anim.frame > 255:
 		$Vending_Machine_anim.frame = 0
 		$Vending_Machine_anim.stop()
@@ -66,12 +71,21 @@ func testing(client_id,random_num):
 	number = random_num
 	bottle_list.append(number)
 	GameManager.Bottle_data[client_id] = bottle_list[-1]
-
+	Collection.append(bottle_list[-1])
 @rpc("any_peer","call_local")
 func offer(server_item_data,Money,shiny_container):
+	offer_counter += 1
 	server_item_data_client = server_item_data
 	money_offered = Money
 	Shiny_container = shiny_container
+	#print(Shiny_container)
+	var list_of_server_values = Array(server_item_data.values())
+	list_of_server_values.append(Money)
+	offer_list_with_values[offer_counter] = list_of_server_values
+	GameManager.Server_item_data = {}
+	GameManager.Shiny_Container = []
+	#print(server_item_data_client)
+	#print(offer_list_with_values) #Last value of the element is Money.
 	"""
 	$RichTextLabel.text = "Server just offered you a item/items to trade!"
 	print("server just offered you a item/items to trade!")
@@ -83,21 +97,20 @@ func offer(server_item_data,Money,shiny_container):
 		print(server_item_data["fruit_sprite"+str(i+1)])
 		"""
 	var offer_window = preload("res://Offer_window.tscn").instantiate()
-	offer_window.name = "Offer Window " + str(Offer_number)
+	offer_window.name = "Offer Window " + str(GameManager.offer_number)
+	offer_window.title = "Offer " + str(GameManager.offer_number) 
 	get_node("Offer_window_container").add_child(offer_window)
 	New_bottle_sig.emit()
-	Offer_number += 1
-	print("Offer_number from Market Script: " + str(Offer_number))
+	GameManager.offer_number += 1
+	print("Offer_number from Market Script: " + str(GameManager.offer_number))
 	
-"""
-func _on_area_2d_body_entered(body):
-	print(body)
-"""
-
 @rpc("any_peer","call_local")
 func shiny_Identification(shiny_container):
 	Shiny_container = shiny_container
-
+	
+@rpc("any_peer","call_local")
+func moneyandreroll_transaction(money):
+	pass
 
 func _on_timer_timeout():
 	if len(bottle_list) == 3:
@@ -107,3 +120,7 @@ func _on_timer_timeout():
 			selling_item.scale = Vector2(1.5,1.5)
 			selling_item.show()
 			get_node("Local_Store/Item"+str(i+1)).add_child(selling_item)
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	pass # Replace with function body.

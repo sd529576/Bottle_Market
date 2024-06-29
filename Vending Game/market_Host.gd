@@ -8,6 +8,7 @@ var bottle_list = []
 var number = 0
 var client_tester = 0
 var re_roll_balance = 10
+var re_roll_gain = 0
 var Item_count = 0
 var on_item = false
 var once = false
@@ -15,6 +16,7 @@ var held = false
 var card_formed = false
 var hmm = false
 var new_sprite = preload("res://new_sprite.tscn").instantiate()
+var market = preload("res://market.tscn").instantiate()
 var item_placed = false
 signal Book_Anim_sig
 func _ready():
@@ -23,6 +25,7 @@ func _ready():
 	for i in range(0,10):
 		$OptionButton.add_item("$ " + str(i), i)
 	$Bunny_Sprite.play("default")
+	
 func New_user_window_creation():
 	player_number += 1
 	if len(get_node("Window_container").get_children()) == 0:
@@ -56,6 +59,9 @@ func _process(delta):
 	#print("server_item_data: " + str(GameManager.Server_item_data))
 	#print("reroll balance " + str(re_roll_balance))
 	#print(GameManager.Shiny_Container)
+	#print(GameManager.Server_item_data)
+	if Input.is_action_just_pressed("re_roll_coin"):
+		get_node("Marker2D").popup()
 	"""
 	print("length of server_item_data: " + str(len(GameManager.Server_item_data)))
 	print("Item_count: " + str(Item_count))
@@ -117,8 +123,7 @@ func _on_trading_back_btn_pressed():
 	else:
 		pass
 
-func re_roll
-():
+func re_roll():
 	var random = RandomNumberGenerator.new()
 	var random_num = random.randi_range(1,170)
 	for i in $Item_Container.get_children():
@@ -145,7 +150,7 @@ func Item_mouse_movement():
 		
 	if held == true:
 		for i in $Item_Container.get_children():
-			if i.name == "fruit_sprite" + str(Item_count):
+			if i.name == i.self_name:
 				var pos = get_global_mouse_position()
 				i.global_position = pos
 				
@@ -193,20 +198,21 @@ func offer(Server_item_data,money,shiny_container):
 	pass
 		
 func _on_offer_button_pressed():
-	for i in GameManager.Server_item_data.keys():
-		for j in $Item_Container.get_children():
-			if i == str(j.name) and len(j.get_children()) == 1:
-				j.queue_free()
-			elif i == str(j.name) and len(j.get_children()) == 2:
-				GameManager.Shiny_Container.append([str(i),"True"])
-				j.queue_free()
-			#elif i == str(j.name) and j.
-	#length of server item data gives the remainder of the items left for the server after offering.
-	if len(GameManager.Players.keys()) == 1:
-		$Player1_Offer.disabled = false
-	elif len(GameManager.Players.keys()) == 2:
-		$Player1_Offer.disabled = false
-		$Player2_Offer.disabled = false
+	if len(GameManager.Server_item_data) > 0:
+		for i in GameManager.Server_item_data.keys():
+			for j in $Item_Container.get_children():
+				if i == str(j.name) and len(j.get_children()) == 1:
+					j.queue_free()
+				elif i == str(j.name) and len(j.get_children()) == 2:
+					GameManager.Shiny_Container.append([str(i),"True"])
+					j.queue_free()
+				#elif i == str(j.name) and j.
+		#length of server item data gives the remainder of the items left for the server after offering.
+		if len(GameManager.Players.keys()) == 1:
+			$Player1_Offer.disabled = false
+		elif len(GameManager.Players.keys()) == 2:
+			$Player1_Offer.disabled = false
+			$Player2_Offer.disabled = false
 	#print(GameManager.Server_item_data)
 	#GameManager.Server_item_data = {}
 # only show to player1 at the current moment by unabling the player 1 button.
@@ -217,13 +223,13 @@ func _on_player_1_offer_pressed():
 	Item_count -= len(GameManager.Server_item_data)
 	GameManager.Server_item_data = {}
 	GameManager.Shiny_Container = []
-
+	$Player1_Offer.disabled = true
 func _on_player_2_offer_pressed():
-	rpc_id(GameManager.Players.keys()[1],"offer",GameManager.Server_item_data,$OptionButton.selected)
+	rpc_id(GameManager.Players.keys()[1],"offer",GameManager.Server_item_data,$OptionButton.selected,GameManager.Shiny_Container)
 	Item_count -= len(GameManager.Server_item_data)
 	GameManager.Server_item_data = {}
 	GameManager.Shiny_Container = []
-
+	$Player2_Offer.disabled = true
 func _on_timer_timeout():
 	var random = RandomNumberGenerator.new()
 	var random_num = random.randi_range(1,3)
@@ -233,12 +239,21 @@ func _on_timer_timeout():
 		$SpeechBubble/RichTextLabel.text = "Welcome to the Host Lobby!"
 	elif random_num == 3:
 		$SpeechBubble/RichTextLabel.text = "Check out the Sprite Dictionary to see what's worth it!"
-	print($Timer.time_left)
+	#print($Timer.time_left)
 
 @rpc("any_peer","call_local")
 func shiny_Identification(shiny_container):
 	pass
-	
+
+@rpc("any_peer","call_local")
+func moneyandreroll_transaction(money):
+	if money > 4:
+		re_roll_gain = 2
+		re_roll_balance += re_roll_gain
+	elif money < 5:
+		re_roll_gain = 1
+		re_roll_balance += re_roll_gain
+	get_node("Marker2D").popup()
 func randomizer():
 	var random = RandomNumberGenerator.new()
 	var random_num = random.randi_range(1,4)
@@ -250,4 +265,4 @@ func randomizer():
 func _on_dictionary_btn_pressed():
 	$Dictionary/Dictionary_Lobby.make_current()
 	Book_Anim_sig.emit()
-
+	
