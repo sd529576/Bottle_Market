@@ -43,10 +43,10 @@ func _on_roll_pressed():
 	#print(GameManager.Bottle_data)
 func _physics_process(delta):
 	#print(GameManager.Bottle_data)
-	print(bottle_list)
+	#print(bottle_list)
 	#print(item_counter)
 	#print(server_item_data_client)
-	#print(Collection)
+	print(Collection)
 	if $Vending_Machine_anim.frame > 255:
 		$Vending_Machine_anim.frame = 0
 		$Vending_Machine_anim.stop()
@@ -113,10 +113,10 @@ func moneyandreroll_transaction(money):
 	pass
 
 func _on_timer_timeout():
-	if len(bottle_list) == 3:
-		for i in len(bottle_list):
+	if len(Collection) >= 3:
+		for i in len(Collection):
 			var selling_item = preload("res://description_sprite.tscn").instantiate()
-			selling_item.frame = bottle_list[i]
+			selling_item.frame = Collection[i]
 			selling_item.scale = Vector2(1.5,1.5)
 			selling_item.show()
 			get_node("Local_Store/Item"+str(i+1)).add_child(selling_item)

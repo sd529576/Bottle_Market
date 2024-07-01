@@ -137,7 +137,6 @@ offset_right = 42.0
 offset_bottom = 76.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 30
-text = "$"
 
 [node name="Item2" type="Node2D" parent="."]
 position = Vector2(581, 319)
@@ -149,7 +148,6 @@ offset_right = 45.0
 offset_bottom = 77.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 30
-text = "$"
 
 [node name="Item2_sell_btn" type="Button" parent="Item2"]
 offset_left = -76.0
@@ -168,7 +166,6 @@ offset_right = 56.0
 offset_bottom = 78.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 30
-text = "$"
 
 [node name="Item3_sell_btn" type="Button" parent="Item3"]
 offset_left = -76.0
